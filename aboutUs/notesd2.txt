@@ -1,0 +1,66 @@
+Day2 Topics:
+
+Jargon:
+Blockers: things are blocking progress
+
+Repository: Version control of source code. Single version of project saved (like github) .git folder
+meta info about repository stored here
+
+Source Code: Application you're building 
+Team Name: Manticore, Artificers
+
+Branch: repo and work taken from it
+
+Course:
+Source Control Managment (VCS, CVCS, DVCS)
+VCS: Version Control System: backs up work, allows collab
+	>Repository tracks changes
+
+CVCS: CVCS is dependent on the access to the server.
+
+DVCS: (git) every user has a local copy of the repository in addition 
+to the central repo on the server side.  DVCS provides the benefits to 
+work offline. Everything except push and pull the code can be done without 
+an internet connection
+
+GIT DVCS: Most popular, best.
+GITHUB: Cloud Host of GIT repositories
+
+in GIT Make repository public, returns repo code
+first be in dir where repo is
+
+git init create repository
+git init <respository name>
+git remote add <short name> <url to remote repo> add itto local : to add
+git clone <url to repo>  : get remote repo to a local repo you don't have
+git clone /path/to/repository : clone local repo to another local
+
+gitignore: don't commit sensitive data
+	touch .gitignore
+	code .gitignore
+	add file.ext to ignore list
+
+git add .   : to add files to staging area
+git add hw.txt  : or add one file to staging
+git status : shows changes/unchanged so far
+git pull : getchanges from remote repo to local you alreadygit Pull have
+git commit -m "important message about push" to local
+git push --set-upstream origin main    : Final confirm : sends all commits 
+git push --set-upstream origin test    : Final confirm for branch test
+git log : read out of commit
+
+git branch : list all the branches present in the repo
+git branch --help
+git branch -d nameofbranch
+git branch –d <branch-name> : delete
+git checkout branchname : go to rbanch
+git branch <new-branch-name>
+git checkout -b <branch-name>
+git remote -v : shows all remote repos
+git remote add origin <host-or-remoteURL>  : To connect the local repository to a remote server
+git remote rm <name-of-the-repository> : Will delete a connection to a specified remote repo
+
+git merge <branch name>
+git pull origin main
+
+in git pull request, better way to merge to main
