@@ -12,13 +12,15 @@ do
     echo "Guess a number: " ; 
     read guess
 
-    if [ "$guess" -lt $number ] ; then
-        lastdiff=$(($number - $guess))
-        echo "Higher! You're off by $lastdiff"
+    if [ "$guess" -lt $number ] ; 
+        then
+            lastdiff=$(($number - $guess))
+            echo "Higher! You're off by $lastdiff"
 
-    elif [ "$guess" -gt $number ] ; then
-        diff=$(($guess - $number))
-        echo "Lower! You're off by $diff"
+    elif [ "$guess" -gt $number ] ; 
+        then
+            diff=$(($guess - $number))
+            echo "Lower! You're off by $diff"
 
     fi
     guesses=$(($guesses + 1))
