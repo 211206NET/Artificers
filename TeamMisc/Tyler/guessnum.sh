@@ -4,11 +4,13 @@ randomNum=$(($RANDOM % 101))
 diff=1
 lastdiff=0          
 guess=0                
-guesses=0                                    
+guesses=0                   
+
+echo "A random number between 0 and 100 was selected."
 
 while [ $guess -ne $randomNum ] 
 do
-    echo "Guess a number: " ; 
+    echo "Guess the number: " ; 
     read guess
 
     if [ "$guess" -lt $randomNum ] ; 
@@ -25,5 +27,5 @@ do
     guesses=$(($guesses + 1))
 done
 
-echo "Correct!! You guessed #$randomNum in $guesses tries."
+echo "Correct!! You guessed #$randomNum. It took you $guesses tries."
 exit
