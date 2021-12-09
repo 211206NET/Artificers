@@ -1,7 +1,6 @@
 ﻿
 using System.Text.RegularExpressions;
 
-// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Guess Game!");
 
 Random rand = new Random(); //C# requires an object made for random
@@ -16,9 +15,6 @@ string[] honing = new string[] { "very hot!", "hot.", "warm.", "cold.", "freezin
 int wtHone; //What position of hone to use
 string choose; //At end the user can choose if to continue
 
-//Cheat answer
-//Console.WriteLine("{0}", randomNum); 
-
 //The main loop
 while( diff != 0 )
 {
@@ -28,9 +24,8 @@ while( diff != 0 )
 
     //return difference between values MATH.ABS
     diff=Math.Abs(guess - randomNum);
-    //Console.WriteLine("{0}",diff); 
 
-    //Set how close hint valueswitch (measurement)
+    //Set how close hint 
     switch (diff)
     {
         case < 10:
@@ -50,7 +45,7 @@ while( diff != 0 )
             break;
     }
 
-    if ( guess == randomNum ) //diff =  0
+    if ( guess == randomNum ) //or diff ==  0
     {
         Console.WriteLine("That is correct!");
     }
@@ -60,29 +55,23 @@ while( diff != 0 )
         {
             if ( lastDiff < diff )
             {
-                Console.WriteLine("Incorrect, you are {1} You tried {0} times, you are getting colder, you want to try again? 'y' or 'n", count.ToString(), honing[wtHone]); 
+                Console.WriteLine("Incorrect, you are {0} You tried {1} times, \n" +
+                "you are getting colder, you want to try again? 'y' or 'n", honing[wtHone], count.ToString()); 
             }else{
-                Console.WriteLine("Incorrect, you are {1} You tried {0} times, but you are getting warmer, you want to try again? 'y' or 'n'", count.ToString(), honing[wtHone]); 
+                Console.WriteLine("Incorrect, you are {0} You tried {1} times, \n" +
+                "but you are getting warmer, you want to try again? 'y' or 'n'", honing[wtHone], count.ToString()); 
             }
         }
         else
         {
-            Console.WriteLine("Incorrect, you want to try again? 'y' or 'n'");
+            Console.WriteLine("Incorrect, but this was only your first try. Do you want to try again? 'y' or 'n'");
         }
 
         lastDiff=diff;
         count=count+1;
         choose = Console.ReadLine();
-        //if(Regex.IsMatch(choose, @"^\d+$"))//Check if result was numeric, Requires System.Text.RegularExpressions;
-        //{
-        //    choose = "n";
-        //}
-
-        if ( choose == "n" )
-        {
-            break;
-        }else{
-            Console.WriteLine("Keep going!"); 
-        }
+        //if(Regex.IsMatch(choose, @"^\d+$")){choose = "n";}//Check if result was numeric, Requires System.Text.RegularExpressions;
+        if ( choose == "n" ){break;}
+        else{Console.WriteLine("Keep going!");}
     }
 }
