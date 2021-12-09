@@ -17,7 +17,7 @@ do
     randomNum=$(($RANDOM % 101)) #0 to 100
 done
 
-echo $randomNum
+echo "Number to guess $randomNum"
 
 while [ $diff -ne 0 ]
 do
