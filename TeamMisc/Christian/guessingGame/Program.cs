@@ -1,7 +1,6 @@
 ﻿Random rd = new Random();
 int randomNum = rd.Next(0,100);
 int input = 101;
-Console.WriteLine("The random number is: " + randomNum);
 Console.WriteLine("Guess a number between 0 - 100");
 int counter = 1;
 int diff;
@@ -11,7 +10,6 @@ while(input != randomNum )
     diff = Math.Abs(input - randomNum);
     if (input < randomNum)
     {
-        Console.WriteLine("Your diff is: " + diff);
         switch (diff)
         {
         case < 5:       
@@ -33,7 +31,6 @@ while(input != randomNum )
     }
     if (input > randomNum)
     {
-        Console.WriteLine("Your diff is: " + diff);
         switch (diff)
         {     
         case < 5:      
@@ -52,10 +49,6 @@ while(input != randomNum )
             Console.WriteLine("give up!");
             break;
         }          
-    }
-    if (input == randomNum)
-    {
-        break;
     }
     counter +=1;
 }
