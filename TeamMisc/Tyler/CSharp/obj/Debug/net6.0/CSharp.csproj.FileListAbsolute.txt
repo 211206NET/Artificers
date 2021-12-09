@@ -1,0 +1,15 @@
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\CSharp.exe
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\CSharp.deps.json
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\CSharp.runtimeconfig.json
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\CSharp.dll
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\ref\CSharp.dll
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\bin\Debug\net6.0\CSharp.pdb
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.csproj.AssemblyReference.cache
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.AssemblyInfoInputs.cache
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.AssemblyInfo.cs
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.csproj.CoreCompileInputs.cache
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.dll
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\ref\CSharp.dll
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.pdb
+D:\Documents\Projects\revature\trainer-code\01Shell\CSharp\obj\Debug\net6.0\CSharp.genruntimeconfig.cache
