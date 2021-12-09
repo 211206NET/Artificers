@@ -17,7 +17,7 @@ while(input != randomNum )
             Console.WriteLine("Try going up a little"); 
             break;                    
         case < 25:        
-            Console.WriteLine("You're not that far off keep trying");
+            Console.WriteLine("You're warm, not that far off keep trying");
             Console.WriteLine("Go up a bit");           
             break;
         case < 50:
@@ -25,7 +25,7 @@ while(input != randomNum )
             Console.WriteLine("Yikes! Go up a lot!");     
             break;
         default: 
-            Console.WriteLine("give up!");
+            Console.WriteLine("Give up, you're not even trying");
             break;
         }      
     }
@@ -38,7 +38,7 @@ while(input != randomNum )
             Console.WriteLine("Try going down a little");                      
             break;
         case < 25:        
-            Console.WriteLine("You're not that far off keep trying");
+            Console.WriteLine("You're warm, try it again");
             Console.WriteLine("Go down a bit");        
             break;
         case  < 50:
@@ -46,7 +46,7 @@ while(input != randomNum )
             Console.WriteLine("Yikes! Go down a lot!");    
             break;
         default: 
-            Console.WriteLine("give up!");
+            Console.WriteLine("Come on thats nowhere near right!");
             break;
         }          
     }
