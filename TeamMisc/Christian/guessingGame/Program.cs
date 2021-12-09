@@ -1,9 +1,9 @@
 ﻿Random rd = new Random();
 int randomNum = rd.Next(0,100);
 int input = 101;
-Console.WriteLine("Guess a number between 0 - 100");
 int counter = 1;
 int diff;
+Console.WriteLine("Guess a number between 0 - 100");
 while(input != randomNum ) 
 {
     input = Convert.ToInt32(Console.ReadLine());
