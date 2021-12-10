@@ -11,7 +11,9 @@ int lastDiff=0; //Previous guess user made to compare if they got closer or not
 int count=1;   //How many tries the user made
 string guessS; //User guess returned as string
 int guess;     //The guess the user made converted to int
+//0, 1, 
 string[] honing = new string[] { "very hot!", "hot.", "warm.", "cold.", "freezing cold!"};
+int[] intArray = new int[5];
 int wtHone; //What position of hone to use
 string choose; //At end the user can choose if to continue
 
