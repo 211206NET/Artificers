@@ -1,0 +1,16 @@
+namespace ToDo;
+
+public class ToDoItem {
+    public ToDoItem() {}
+    
+    public bool IsDone = {get; set; }
+    public string note { get; set; }
+
+    public void CompleteItem() {
+      this.IsDone = true;
+    }
+    public string Print()
+    {
+      return $"Done":{this.Note}" Note: {this.Note}";
+    }
+}
