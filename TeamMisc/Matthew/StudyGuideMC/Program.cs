@@ -7,9 +7,9 @@ Console.WriteLine("\nWelcome to the {0} study guide! \nThis guide is built to le
 int qDone = 0; //How many Questions answered out of total
 
 //int tLen = 4;
-int[,] qCheckOff = new int[31,2];//Stores index list of questions, tracks what was already asked 0/1
+int[,] qCheckOff = new int[61,2];//Stores index list of questions, tracks what was already asked 0/1
 int i; 
-for (i = 1; i < 31; i++)//Second value non-inclusive
+for (i = 1; i < 61; i++)//Second value non-inclusive
 {
     qCheckOff[i,1]=0;
 }
@@ -22,13 +22,12 @@ int rand = 0;
 string input; //Player answer
 int rightA;
 
-while(qDone < 30)
+while(qDone < 60)
 {
-    
     while(nxtQ == 0)//Keep looking for random numbers until value is set
     {
         Random randA = new Random();
-        rand = randA.Next(1,31);
+        rand = randA.Next(1,61);
         if(qCheckOff[rand,1] == 0)
         {
             //Value was not used yet
