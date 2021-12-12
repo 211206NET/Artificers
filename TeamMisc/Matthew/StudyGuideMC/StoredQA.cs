@@ -256,11 +256,11 @@ public class StoredQA {
         this.q[k,3] = "str=$(echo $str | tr \"[echo :$str.lower:].case\" || \"[echo :$str.upper:].case\")"; 
         this.q[k,4] = "str=$string($str | -c4-8).cut to upper";
         k=53;
-        this.q[k,0] = "In Shell Script, what do you type to ?"; 
-        this.q[k,1] = "str=$(echo $str | tr \"[:lower:]\" \"[:upper:]\")"; 
-        this.q[k,2] = "str toUpper;"; 
-        this.q[k,3] = "str=$(echo $str | tr \"[echo :$str.lower:].case\" || \"[echo :$str.upper:].case\")"; 
-        this.q[k,4] = "str=$string($str | -c4-8).cut to upper";
+        this.q[k,0] = "Visual Studio Code, what doe sit mean if the title at the top is red and crossed out?"; 
+        this.q[k,1] = "The local file of the code being worked on has been deleted, probably by a git pull"; 
+        this.q[k,2] = "The code you are working on is broken and has been removed by the system for your convenience."; 
+        this.q[k,3] = "You have auto save on."; 
+        this.q[k,4] = "It doesn't mean anything important, it's just an aesthetic feature.";
         k=54;
         this.q[k,0] = "In Shell Script, what do you type to easily change the string 'str' to uppercase?"; 
         this.q[k,1] = "str=${str^^}"; 
