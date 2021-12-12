@@ -256,7 +256,7 @@ public class StoredQA {
         this.q[k,3] = "str=$(echo $str | tr \"[echo :$str.lower:].case\" || \"[echo :$str.upper:].case\")"; 
         this.q[k,4] = "str=$string($str | -c4-8).cut to upper";
         k=53;
-        this.q[k,0] = "Visual Studio Code, what doe sit mean if the title at the top is red and crossed out?"; 
+        this.q[k,0] = "In Visual Studio Code, what does it mean if the title at the top is red and crossed out?"; 
         this.q[k,1] = "The local file of the code being worked on has been deleted, probably by a git pull"; 
         this.q[k,2] = "The code you are working on is broken and has been removed by the system for your convenience."; 
         this.q[k,3] = "You have auto save on."; 
