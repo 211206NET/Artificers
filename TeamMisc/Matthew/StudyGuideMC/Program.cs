@@ -24,7 +24,6 @@ int rightA;
 
 while(qDone < 60)
 {
-    
     while(nxtQ == 0)//Keep looking for random numbers until value is set
     {
         Random randA = new Random();
