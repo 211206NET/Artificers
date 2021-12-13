@@ -1,8 +1,18 @@
 namespace RestaurantReviews;
 
-public class Restaurant {
+public class Rest {
 
     //In a rest. I want to store Name, City, State...
+    public Rest()
+    {
+        this.Reviews = new List<Review>();
+    }
+
+    public Rest(string name)
+    {
+        this.Reviews = new List<Review>();
+        this.Name = name;
+    }
 
     //This is a property, a type member
     //Access modifier controls visibility of type and type members
@@ -13,6 +23,8 @@ public class Restaurant {
     public string Name { get; set; }
     public string City { get; set; }
     public string State { get; set; }
+    public List<Review> Reviews { get; }
+    //public List<Review> Reviews { get; }
 
     //private string _name; //Underscore to denote private var
 
