@@ -25,7 +25,7 @@ public class Rest {
     public string Name { get; set; }
     public string City { get; set; }
     public string State { get; set; }
-    public List<Review> Reviews { get; }
+    public List<Review> Reviews { get; set; }
     //public List<Review> Reviews { get; }
 
     //private string _name; //Underscore to denote private var

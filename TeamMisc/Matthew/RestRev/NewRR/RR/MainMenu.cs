@@ -1,5 +1,4 @@
 using Models;
-//using DL;
 using BL;
 
 namespace UI;
@@ -29,48 +28,51 @@ Console.WriteLine("Restaurant Review");
 while(!exit)
 {
     Console.WriteLine("What would you like to do?");
-    Console.WriteLine("1.) Create a new Restaurant!");//1.)
-    Console.WriteLine("2.) View all Restaurants");//2.) 
-    Console.WriteLine("3.) Leave a Review");//3.) 
+    Console.WriteLine("1.) Manage Restaurant.");//1.)
+    Console.WriteLine("2.) Leave a Review");//2.) 
     Console.WriteLine("x.) Exit");//x.) 
     string inputX = Console.ReadLine();
 
     switch(inputX)
     {
         case "1":
+            new RestMenu().Start();
+
+            // RestMenu newRestM = new RestMenu();
+            // newRestM.Start();
             //Rest newRestro = new Rest();
 
-            Console.WriteLine("Add new restaurant");
-            Console.WriteLine("Name: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("City: ");
-            string city = Console.ReadLine();
-            Console.WriteLine("State: ");
-            string state = Console.ReadLine();
+            // Console.WriteLine("Add new restaurant");
+            // Console.WriteLine("Name: ");
+            // string name = Console.ReadLine();
+            // Console.WriteLine("City: ");
+            // string city = Console.ReadLine();
+            // Console.WriteLine("State: ");
+            // string state = Console.ReadLine();
 
-            Rest newRest = new Rest{
-                Name = name,
-                City = city,
-                State = state
-            };
+            // Rest newRest = new Rest{
+            //     Name = name,
+            //     City = city,
+            //     State = state
+            // };
 
-            //StaticStorage.allRests.Add(newRest);
-            _bl.AddRest(newRest);
+            // //StaticStorage.allRests.Add(newRest);
+            // _bl.AddRest(newRest);
             break;
+        // case "2":
+            // Console.WriteLine("Add one");
+            // foreach(Rest resto in _bl.GetAllRest())//Just made up resto right here
+            // {
+            //     Console.WriteLine($"Restaurant: {resto.Name} \n"+
+            //     $"City: {resto.City}\nState: {resto.State}");
+            //     Console.WriteLine("=======Reviews========");
+            //     foreach(Review review in resto.Reviews)
+            //     {
+            //         Console.WriteLine($"Rating: {review.Rating} \t Note: {review.Note}");
+            //     }
+            // }
+            // break;
         case "2":
-            Console.WriteLine("Add one");
-            foreach(Rest resto in _bl.GetAllRest())//Just made up resto right here
-            {
-                Console.WriteLine($"Restaurant: {resto.Name} \n"+
-                $"City: {resto.City}\nState: {resto.State}");
-                Console.WriteLine("=======Reviews========");
-                foreach(Review review in resto.Reviews)
-                {
-                    Console.WriteLine($"Rating: {review.Rating} \t Note: {review.Note}");
-                }
-            }
-            break;
-        case "3":
             List<Rest> allRestaurants = _bl.GetAllRest();
             Console.WriteLine("Pick a restaurant to review: ");
             for(int i = 0; i < allRestaurants.Count; i++)
@@ -102,12 +104,12 @@ while(!exit)
             break;
     }
 
-    Console.WriteLine("Add another? [y/n]");
-    string input = Console.ReadLine();
-    if(input == "n")
-    {
-        exit = true;
-    }
+    // Console.WriteLine("Add another? [y/n]");
+    // string input = Console.ReadLine();
+    // if(input == "n")
+    // {
+    //     exit = true;
+    // }
 
     // Restaurant newRest = new Restaurant();
     // newRest.Name = name;

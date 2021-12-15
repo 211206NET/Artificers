@@ -52,6 +52,11 @@ do
         echo "got this far"
     fi
 
+    if [ $diff -gt 60 ]
+    then
+        echo "That sure is a big diff"
+    fi
+
     if [ $guess = $randomNum ] #$diff =  0
     then
         echo "That is correct!"
