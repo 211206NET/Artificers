@@ -3,15 +3,17 @@
 //Some kind of visual material (power point), Demo that shows different unique function
 //Google uses for bit arrays
 //List in our worlds talking points
-//Powerpoint or something
 
 
-//===========================================<>  Bit Array  <>===========================================\\
+Console.WriteLine("//===================================<>  Bit Array  <>====================================//\n");
 /*Why bit array is used?
-Bit array is used to achieve bit-level parallelism in processing executions. It is a kind of parallel computing based on increasing 
-word size of the processor which reduces the number of instructions for the processor. It allows the execution of operations to 
-occur quickly. As a result of bit level parallelism, Bit array allows small array of bits to be stored and manipulated in the register 
-set for long period of time.*/
+Bit array is used to achieve bit-level parallelism in processing executions. It is a kind of parallel computing based 
+on increasing word size of the processor which reduces the number of instructions for the processor. It allows the 
+execution of operations to occur quickly. As a result of bit level parallelism, Bit array allows small array of bits to 
+be stored and manipulated in the register set for long period of time.
+
+Because of their compactness, bit arrays have a number of applications in areas where space or efficiency is at a premium. 
+Most commonly, they are used to represent a simple group of boolean flags or an ordered sequence of boolean values.*/
 //Non Generic
 
 //creating two  bit arrays of size 8
@@ -63,7 +65,7 @@ for (int i = 0; i < ba3.Count; i++)
 }
 Console.WriteLine();
 
-//===========================================<>  Array List  <>===========================================\\
+Console.WriteLine("//===================================<>  Array List   <>===================================//\n");
 ArrayList asl = new ArrayList();
 asl.Add("One");
 asl.Add("Two");
@@ -107,7 +109,7 @@ foreach (int i in al)
 
 Console.WriteLine("\n");
 
-//===========================================<>  Standard Array  <>===========================================\\
+Console.WriteLine("//===================================<>  Standard Array   <>===================================//\n");
 object[] myArr = new object[5];
 for(int i = 0; i < myArr.Length; i++)
 {
