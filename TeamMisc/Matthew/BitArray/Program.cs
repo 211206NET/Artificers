@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-//BitArray due Dec 17th, 10 to 15 minute presentation each person speaks, some kind of visual material (power point), Demo that shows different unique function
+//Array, Array List, BitArray due Dec 17th, 10 to 15 minute presentation each person speaks, 
+//Some kind of visual material (power point), Demo that shows different unique function
 //Google uses for bit arrays
 //List in our worlds talking points
-//Maybe make unity project for bitarray
+//Powerpoint or something
+
 
 //===========================================<>  Bit Array  <>===========================================\\
 /*Why bit array is used?
@@ -60,3 +62,77 @@ for (int i = 0; i < ba3.Count; i++)
     Console.Write("{0, -6} \n", ba3[i]);
 }
 Console.WriteLine();
+
+//===========================================<>  Array List  <>===========================================\\
+ArrayList asl = new ArrayList();
+asl.Add("One");
+asl.Add("Two");
+asl.Add("Three");
+asl.Add("Four");
+
+ArrayList al = new ArrayList();
+Console.WriteLine();
+Console.WriteLine("Adding some numbers to Array List:");
+al.Add(45);
+al.Add(78);
+al.Add(33);
+al.Add(56);
+al.Add(12);
+al.Add(23);
+al.Add(9);
+
+Console.WriteLine("Capacity: {0} ", al.Capacity);
+Console.WriteLine("Count: {0}", al.Count);
+
+Console.Write("Content: ");
+foreach (int i in al)
+{
+    Console.Write(i + " ");
+}
+
+Console.WriteLine();
+Console.Write("Content of ASL: ");
+foreach (string i in asl)
+{
+    Console.Write(i + " ");
+}
+
+Console.WriteLine();
+Console.Write("Sorted Content: ");
+al.Sort();
+foreach (int i in al)
+{
+    Console.Write(i + " ");
+}
+
+Console.WriteLine("\n");
+
+//===========================================<>  Standard Array  <>===========================================\\
+object[] myArr = new object[5];
+for(int i = 0; i < myArr.Length; i++)
+{
+    myArr[i] = i*10;
+    Console.Write("Standard Array "+i+": "+myArr[i] + "\n");
+}
+
+Console.WriteLine();
+
+object[] myArr2 = {"a","b","c"};
+for(int i = 0;i < myArr2.Length; i++)
+{
+    Console.Write("Second Standard Array " + i + ": " + myArr2[i]+"\n");
+}
+
+Console.WriteLine();
+
+int[,] table = new int[10, 10];
+for(int i = 1; i <= table.GetLength(0); ++i)//++ before 'i' means value is added before line compiles
+{
+    for (int j = 1; j <= table.GetLength(1); ++j)
+    {
+        table[i - 1, j - 1] = i * j;
+        Console.Out.Write(table[i - 1, j -1] + " ");
+    }
+}
+
+Console.WriteLine("\n");

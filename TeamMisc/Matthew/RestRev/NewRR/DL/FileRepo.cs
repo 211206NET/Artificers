@@ -86,3 +86,14 @@ public class FileRepo : IRepo
 
 } 
 
+//Exception occurs when the flow of the program has been messed up
+//Errors are not handled, they can crash application (stack overflow)
+
+//Handle exceptions to allow the program to keep running
+
+//Handeling is the try/catch block, if handled right the program can continue to run
+
+//To know why the program isn't working
+
+//The exception hierarchy ordered from specific to general, System /Application
+
