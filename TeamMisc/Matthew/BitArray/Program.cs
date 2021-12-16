@@ -13,7 +13,10 @@ execution of operations to occur quickly. As a result of bit level parallelism, 
 be stored and manipulated in the register set for long period of time.
 
 Because of their compactness, bit arrays have a number of applications in areas where space or efficiency is at a premium. 
-Most commonly, they are used to represent a simple group of boolean flags or an ordered sequence of boolean values.*/
+Most commonly, they are used to represent a simple group of boolean flags or an ordered sequence of boolean values.
+Bitarray takes 1/8 the space as bool
+*/
+
 //Non Generic
 
 //creating two  bit arrays of size 8
@@ -63,6 +66,20 @@ for (int i = 0; i < ba3.Count; i++)
 {
     Console.Write("{0, -6} \n", ba3[i]);
 }
+Console.WriteLine();
+
+//Bit Array Sample, Demo that shows different unique function:
+
+//BitArray Array to compare to Bool Array
+//Unlike Bool, bitarray has bitwise methods (.Or, .Xor...)
+//BitArray is a memory optimization over bool[], but there's no point in using it unless memory is sparse.
+BitArray biArray = new BitArray(8);
+biArray[4] = true;
+
+//Bool Array to Compare to BitArray
+bool[] boArray = new bool[8];
+boArray[4] = true;
+
 Console.WriteLine();
 
 Console.WriteLine("//===================================<>  Array List   <>===================================//\n");
