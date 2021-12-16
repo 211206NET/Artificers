@@ -1,15 +1,18 @@
 using Models;
 using BL;
+using DL;
 
 namespace UI;
 
 public class RestMenu
 {
-    private RRBL _bl;
+    //private RRBL _bl;
+    private IBL _bl;
     
-    public RestMenu() 
+    public RestMenu(IBL bl) 
     {
-        _bl = new RRBL();
+        //_bl = new RRBL(new FileRepo());
+        _bl = bl;
     }
     public void Start()
     {
@@ -53,7 +56,7 @@ public class RestMenu
                     }
                     else
                     {
-                        Console.WriteLine("Add one");
+                        Console.WriteLine("Here are the Restaurants");
                         foreach(Rest resto in _bl.GetAllRest())//Just made up resto right here
                         {
                             Console.WriteLine($"\nRestaurant: {resto.Name} \n"+

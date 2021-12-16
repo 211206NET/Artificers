@@ -1,15 +1,15 @@
-﻿using Models;
-using DL;
+﻿namespace BL;
 
-namespace BL;
-
-public class RRBL
+public class RRBL : IBL
 {
-    private FileRepo _dl;
+    //private FileRepo _dl;
+    //private DBRepo _dl;
+    private IRepo _dl;
 
-    public RRBL()
+    public RRBL(IRepo repo)
     {
-        _dl = new FileRepo();
+        //_dl = new FileRepo();
+        _dl = repo;
     }
 
     public List<Rest> GetAllRest()

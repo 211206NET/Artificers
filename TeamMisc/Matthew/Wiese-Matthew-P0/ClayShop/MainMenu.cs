@@ -15,7 +15,8 @@ public MainMenu()
 public void Start() 
 {
 
-List<Store> allStores = _bl.GetAllStores();
+List<Store> allStores = _bl.GetAllStore();
+
 //List<Store> allStores = new List<Store>();
 bool doOnce = false;
 int idStamp = 1;
@@ -216,7 +217,8 @@ while(!exit)
                 City = userCity,
                 State = userState
             };
-            allStores.Add(storeNew); //Plug new store into store list
+            allStores.AddStore(storeNew);
+            //allStores.Add(storeNew); //Plug new store into store list
             Console.WriteLine($"[{idStamp}] Store: {userStoreName} successfully created!\n");
             //chosenStore = idStamp; //Set current store to store just made
             idStamp++; //Add to idStamp for next store

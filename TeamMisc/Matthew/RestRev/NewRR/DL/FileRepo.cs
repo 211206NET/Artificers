@@ -1,5 +1,3 @@
-using Models;
-//using System.IO;
 using System.Text.Json;
 
 namespace DL;
@@ -7,7 +5,7 @@ namespace DL;
 //Repository Design Pattern
 
 //Read/Write to file
-public class FileRepo 
+public class FileRepo : IRepo
 {
     public FileRepo(){}
 

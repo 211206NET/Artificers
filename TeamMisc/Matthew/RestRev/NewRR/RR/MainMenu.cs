@@ -1,5 +1,6 @@
 using Models;
 using BL;
+using DL;
 
 namespace UI;
 
@@ -11,11 +12,13 @@ namespace UI;
 public class MainMenu {
 
 //public List<Rest> allRests = new List<Rest>();
-private RRBL _bl;
+//private RRBL _bl;
+private IBL _bl;
 
-public MainMenu()
+public MainMenu(IBL bl)
 {
-    _bl = new RRBL();
+    //_bl = new RRBL(new FileRepo());
+    _bl = bl;
 }
 
 public void Start(){
@@ -36,8 +39,11 @@ while(!exit)
     switch(inputX)
     {
         case "1":
-            new RestMenu().Start();
-
+            //new RestMenu(new RRBL(new FileRepo())).Start();
+            IRepo repo = new FileRepo();
+            IBL bl = new RRBL(repo);
+            RestMenu restMenu = new RestMenu(bl);
+            restMenu.Start();
             // RestMenu newRestM = new RestMenu();
             // newRestM.Start();
             //Rest newRestro = new Rest();
