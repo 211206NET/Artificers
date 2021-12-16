@@ -4,7 +4,11 @@
 //Google uses for bit arrays
 //List in our worlds talking points
 
+int showArray = 0; //0 Bitarray, 1 = Array list, 2 = Array
 
+switch(showArray)
+{
+case 0:
 Console.WriteLine("//===================================<>  Bit Array  <>====================================//\n");
 /*Why bit array is used?
 Bit array is used to achieve bit-level parallelism in processing executions. It is a kind of parallel computing based 
@@ -82,6 +86,8 @@ boArray[4] = true;
 
 Console.WriteLine();
 
+break;
+case 1:
 Console.WriteLine("//===================================<>  Array List   <>===================================//\n");
 ArrayList asl = new ArrayList();
 asl.Add("One");
@@ -126,6 +132,8 @@ foreach (int i in al)
 
 Console.WriteLine("\n");
 
+break;
+case 2:
 Console.WriteLine("//===================================<>  Standard Array   <>===================================//\n");
 object[] myArr = new object[5];
 for(int i = 0; i < myArr.Length; i++)
@@ -154,4 +162,9 @@ for(int i = 1; i <= table.GetLength(0); ++i)//++ before 'i' means value is added
     }
 }
 
+break;
 Console.WriteLine("\n");
+default:
+    Console.WriteLine("Choose 0,1, or 2");
+break;
+}//End Switch
