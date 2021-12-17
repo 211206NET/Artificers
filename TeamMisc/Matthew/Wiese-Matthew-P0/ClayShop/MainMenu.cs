@@ -1,21 +1,19 @@
-using Models;
-using BL;
+using DL;
 
 namespace UI;
-
 public class MainMenu {
 
-private CSBL _bl;
-public MainMenu()
+private IBL _bl;
+public MainMenu(IBL bl)
 {
-    _bl = new CSBL();
+    _bl = bl;
 }
 
 
 public void Start() 
 {
 
-List<Store> allStores = _bl.GetAllStore();
+List<Store> allStores = _bl.GetAllStores();
 
 //List<Store> allStores = new List<Store>();
 bool doOnce = false;
@@ -217,7 +215,8 @@ while(!exit)
                 City = userCity,
                 State = userState
             };
-            allStores.AddStore(storeNew);
+            //allStores.AddStore(storeNew);
+            _bl.AddStore(storeNew);
             //allStores.Add(storeNew); //Plug new store into store list
             Console.WriteLine($"[{idStamp}] Store: {userStoreName} successfully created!\n");
             //chosenStore = idStamp; //Set current store to store just made

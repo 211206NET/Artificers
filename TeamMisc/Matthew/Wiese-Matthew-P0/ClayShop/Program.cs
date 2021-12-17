@@ -1,4 +1,7 @@
 ﻿using UI;
+using DL;
 
-MainMenu menu = new MainMenu();
+IRepo repo = new FileRepo();
+CSBL bl = new CSBL(repo);
+MainMenu menu = new MainMenu(bl);
 menu.Start();

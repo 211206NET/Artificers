@@ -1,10 +1,7 @@
-﻿using Models;
-
+﻿
 namespace DL;
-
-public static class StaticStorage
+public class StaticStorage : IRepo
 {
-    
     //Will make only one list: static
     private static List<Store> _allStore = new List<Store>(); 
     
@@ -12,7 +9,7 @@ public static class StaticStorage
     /// Returns all stores from _allStore List
     /// </summary>
     /// <returns>_allStore</returns>
-    public static List<Store> GetAllStores()
+    public List<Store> GetAllStores()
     {
         return StaticStorage._allStore;
     }
@@ -21,7 +18,7 @@ public static class StaticStorage
     /// Adds a new store to the list
     /// </summary>
     /// <param name="storeToAdd"></param>
-    public static void AddStore(Store storeToAdd)
+    public void AddStore(Store storeToAdd)
     {
         StaticStorage._allStore.Add(storeToAdd);
     }
@@ -31,8 +28,16 @@ public static class StaticStorage
     /// </summary>
     /// <param name="clayIndex"></param>
     /// <param name="clayToAdd"></param>
-    public static void AddClay(int clayIndex, Clay clayToAdd)
+    public void AddClay(int clayIndex, Clay clayToAdd)
     {
         StaticStorage._allStore[clayIndex].locClay.Add(clayToAdd);
+    }
+    public void AddTools(int toolsIndex, Tools toolsToAdd)
+    {
+        StaticStorage._allStore[toolsIndex].locTools.Add(toolsToAdd);
+    }
+    public void AddEquip(int equipIndex, Equip equipToAdd)
+    {
+        StaticStorage._allStore[equipIndex].locEquip.Add(equipToAdd);
     }
 }
