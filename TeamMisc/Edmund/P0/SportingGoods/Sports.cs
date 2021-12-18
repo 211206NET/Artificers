@@ -22,6 +22,30 @@ while(!exit)
         // search collection of users for authenticated existing users
         // if credentials are wrong -> try again or do you want to sign up as new user
         // if credentials are right -> user can view order history or order existing inventory
+        Console.WriteLine("Enter Existing Username");
+        string existingUsername = Console.ReadLine();
+        Console.WriteLine("Enter your Password");
+        string existingPassword = Console.ReadLine();
+        bool credentialsRight = false;
+        foreach(User existingUser in UserList)
+        {
+            if(existingUsername == existingUser.Username && existingPassword == existingUser.Password){
+                
+                credentialsRight = true;  
+                break;
+            }
+        }
+        if( credentialsRight == true){
+            // if credentials are right -> user can view order history or order existing inventory
+        }
+        else{
+        
+        // if credentials are wrong -> try again or do you want to sign up as new user
+        Console.WriteLine("Please Try Again")
+
+        }
+        
+        
         
         break;
 
@@ -52,8 +76,12 @@ while(!exit)
         //prompt employee to enter their username -> search database for existing employees
         //search collection of users for authenticated existing users
         // if credentials are wrong -> tell user that credentials not found/ ask them to contact their company
-        // if credentials are right -> user can view store inventory
-
+        // if credentials are right -> user can view store inventory, order inventory for store and customers,
+        // - continued from above - and view order histories for store and customers
+        Console.WriteLine("Enter Employee Username");
+        string empUsername = Console.ReadLine();
+        Console.WriteLine("Enter Employee Password");
+        string empPassword = Console.ReadLine();
         break;
 
 
