@@ -22,6 +22,7 @@ while(!exit)
         // search collection of users for authenticated existing users
         // if credentials are wrong -> try again or do you want to sign up as new user
         // if credentials are right -> user can view order history or order existing inventory
+        // user can select which store they want to browse
         Console.WriteLine("Enter Existing Username");
         string existingUsername = Console.ReadLine();
         Console.WriteLine("Enter your Password");
@@ -41,7 +42,7 @@ while(!exit)
         else{
         
         // if credentials are wrong -> try again or do you want to sign up as new user
-        Console.WriteLine("Please Try Again")
+        Console.WriteLine("Please Try Again");
 
         }
         
@@ -82,6 +83,24 @@ while(!exit)
         string empUsername = Console.ReadLine();
         Console.WriteLine("Enter Employee Password");
         string empPassword = Console.ReadLine();
+
+        bool credentialsRight = false;
+        foreach(User existingUser in UserList)
+        {
+            if(existingUsername == existingUser.Username && existingPassword == existingUser.Password){
+                
+                credentialsRight = true;  
+                break;
+            }
+        }
+        if( credentialsRight == true){
+            // if credentials are right -> user can view order history or order existing inventory
+        }
+        else{
+        
+        // if credentials are wrong -> try again or do you want to sign up as new user
+        Console.WriteLine("Please Try Again");
+
         break;
 
 
