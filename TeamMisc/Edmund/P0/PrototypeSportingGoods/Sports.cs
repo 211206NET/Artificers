@@ -99,7 +99,7 @@ while(!exit)
         else{
         
         // if credentials are wrong -> try again or do you want to sign up as new user
-        Console.WriteLine("Please Try Again");
+        Console.WriteLine("Please Try Again or Contact HR for Credentials");
 
         break;
 
