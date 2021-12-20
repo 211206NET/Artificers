@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using System.Linq;
 //Array, Array List, BitArray due Dec 17th, 10 to 15 minute presentation each person speaks, 
 //Some kind of visual material (power point), Demo that shows different unique function
 //Google uses for bit arrays
 //List in our worlds talking points
 
-int showArray = 0; //0 Bitarray, 1 = Array list, 2 = Array
+int showArray = 2; //0 Bitarray, 1 = Array list, 2 = Array
 
 switch(showArray)
 {
@@ -106,7 +107,8 @@ al.Add(12);
 al.Add(23);
 al.Add(9);
 
-Console.WriteLine("Capacity: {0} ", al.Capacity);
+//Console.WriteLine("Max: {0}",al.Max());
+Console.WriteLine("Capacity: {0}", al.Capacity);
 Console.WriteLine("Count: {0}", al.Count);
 
 Console.Write("Content: ");
@@ -135,14 +137,16 @@ Console.WriteLine("\n");
 break;
 case 2:
 Console.WriteLine("//===================================<>  Standard Array   <>===================================//\n");
-object[] myArr = new object[5];
-for(int i = 0; i < myArr.Length; i++)
+int[] myArr = new int[5]; //Array is set at a fixed length initially 
+for(int i = 0; i < myArr.Length; i++) //Instead of adding new elements to the array
 {
     myArr[i] = i*10;
     Console.Write("Standard Array "+i+": "+myArr[i] + "\n");
 }
-
 Console.WriteLine();
+
+int maxI = myArr.Max(); //Get biggest number
+Console.WriteLine("maxI: {0}\n",maxI);
 
 object[] myArr2 = {"a","b","c"};
 for(int i = 0;i < myArr2.Length; i++)
@@ -161,6 +165,7 @@ for(int i = 1; i <= table.GetLength(0); ++i)//++ before 'i' means value is added
         Console.Out.Write(table[i - 1, j -1] + " ");
     }
 }
+
 
 break;
 Console.WriteLine("\n");
