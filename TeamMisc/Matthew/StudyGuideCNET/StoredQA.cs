@@ -62,7 +62,7 @@ public class StoredQA {
         this.q[k,4] = "Classes are the folders that project files are stored within.";
         k=7;
         this.q[k,0] = "What are namespaces?"; 
-        this.q[k,1] = "Allow you to utilize the classes located in a different namespace, use the using keyword"; 
+        this.q[k,1] = "Allow you to utilize the classes located in the same namespace, use the 'using' keyword"; 
         this.q[k,2] = "A namespace has no function other than to title a class for ease of organization."; 
         this.q[k,3] = "Namespaces introduced by .NET4 allow a script to encapsulate fragmented streams to an output."; 
         this.q[k,4] = "They allow you to send your files to another compiler even if it's in another language. This is polymorphism.";
