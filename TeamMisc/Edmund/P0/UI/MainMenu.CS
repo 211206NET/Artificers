@@ -1,8 +1,13 @@
-using Sports;
+using Models;
+using DL;
 
-List<User> UserList = new List<User>();
-bool exit= false;
+namespace UI;
 
+public class MainMenu
+
+    public void Start()   {
+
+        bool exit= false;
 
 while(!exit)
 {
@@ -28,7 +33,7 @@ while(!exit)
         Console.WriteLine("Enter your Password");
         string existingPassword = Console.ReadLine();
         bool credentialsRight = false;
-        foreach(User existingUser in UserList)
+        foreach(User existingUser in StaticStorage.UserList)
         {
             if(existingUsername == existingUser.Username && existingPassword == existingUser.Password){
                 
@@ -66,7 +71,7 @@ while(!exit)
                 Password = newPassword
         };
 
-        UserList.Add(newCustomer);
+        StaticStorage.AddUser(selection, newUser);
                 
         
         break;
@@ -85,7 +90,7 @@ while(!exit)
         string empPassword = Console.ReadLine();
 
         bool credentialsRight = false;
-        foreach(User existingUser in UserList)
+        foreach(User existingUser in StaticStorage.UserList)
         {
             if(existingUsername == existingUser.Username && existingPassword == existingUser.Password){
                 
