@@ -25,7 +25,7 @@ public class MainMenu
         bool manager = false;
         string existingUsername = "";
         string existingPassword = "";
-        string input = "0";
+        string input = "4";
 
         while (!exit)
         {
@@ -117,7 +117,7 @@ public class MainMenu
 
 
                 case "3":
-                    Console.WriteLine("Employees Log in Here");
+                    Console.WriteLine("Employers and Employees Log in Here");
                     //prompt employee to enter their username -> search database for existing employees
                     //search collection of users for authenticated existing users
                     // if credentials are wrong -> tell user that credentials not found/ ask them to contact their company
@@ -157,7 +157,8 @@ public class MainMenu
 
                 // extend 4 and 5 for store selection
                 case "4":
-                    List<Store> stores = _bl.GetAllStores();
+                    List<Store> stores = new List<Store>();
+                    _bl.GetAllStores();
                     Console.WriteLine("Please select a store to shop from \n");
                     if (stores.Count > 0)
                     {
@@ -187,7 +188,7 @@ public class MainMenu
                         Store storeToAdd = new Store();
                         storeToAdd.StoreName = "Store " + i;
                         storeToAdd.StoreNumber = i;
-                        storeToAdd.Inventories = new List<Inventory>();
+                        //storeToAdd.Inventories = new List<Inventory>();
 
                         for (int j = 0; j < 4; j++)
                         {
@@ -200,7 +201,7 @@ public class MainMenu
                             inven.Item = prod;
                             inven.Quantity = 10;
 
-                            storeToAdd.Inventories.Add(inven);
+                            //storeToAdd.Inventories.Add(inven);
                         }
 
                         allStores.Add(storeToAdd);
@@ -215,6 +216,7 @@ public class MainMenu
                     Console.WriteLine("Thank you. Please come again.");
 
                     break;
+
                 default:
                     Console.WriteLine("Please Enter a Number Between 1-6");
                     input = "0";
