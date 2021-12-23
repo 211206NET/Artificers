@@ -18,6 +18,8 @@ while(!exit)
         Console.WriteLine("Employer Menu");
         Console.WriteLine("1. Add Store");
         Console.WriteLine("2. Add New Inventory");
+
+    // view customer and store's order history 
         Console.WriteLine("3. Manage Existing Inventory");
         Console.WriteLine("4. Exit");
         input = Console.ReadLine();
