@@ -45,7 +45,7 @@ while(!exit)
     "Questions will be based on this and the one word answer for each question will be from this as well.\n"+
     "Think of the answers as the bullet points you want to remember to jog your memory in a QA interview scenario.\n");
     inputConceptWalk = Console.ReadLine();
-    if(inputConceptWalk == "x"){addQuestionExit = true; break;}//Done adding concepts
+    if(inputConceptWalk == "x"){addQuestionExit = true; exit = true; break;}//Done adding concepts
 
     int qAon = 0; //What out of three QA the user is one. 0 = Q1, 1 = Q2
     while(qAon < 3){
@@ -74,9 +74,7 @@ while(!exit)
         A3 = a3
     };
     //QA = qA  NOPE
-    
     _bl.AddQuestion(newQuestion);
-    addQuestionExit = true;
     }
 
 }
