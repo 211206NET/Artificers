@@ -8,7 +8,7 @@ public class Order
     public int CustomerId { get; set; }
     public int StoreId { get; set; }
     public List<LineItem> LineItems { get; set; }
-    public decimal TotalAmountplusPrice { get; set; }
+    public decimal TotalAmountPlusPrice { get; set; }
     public decimal CalculateTotal() {
         //a method that would go through each lineitem in LineItems property
         //and sets the total property of the particular order object
