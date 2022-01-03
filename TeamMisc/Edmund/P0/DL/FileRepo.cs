@@ -11,10 +11,7 @@ public class FileRepo : IRepo
 
     private string filePath = "../DL/Store.json";
 
-    /// <summary>
-    /// Gets all restaurants from a file
-    /// </summary>
-    /// <returns>List of all restaurants</returns>
+ 
     public List<Store> GetAllStores()
     {
         string jsonString = "";

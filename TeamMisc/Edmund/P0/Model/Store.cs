@@ -3,7 +3,13 @@ namespace Models;
 // create class for store-> username, password, first and last name
 
 public class Store {
-    public string StoreID{ get; set; }
+
+    public Store(){
+        this.Inventories = new List<Product>();
+    }
+
+    
+    public int StoreID{ get; set; }
 
     public string StoreName{ get; set; }
 
@@ -13,10 +19,9 @@ public class Store {
 
     public string Address { get; set; }
 
-    public List<Inventory> Inventories { get; set; }
-
     public List<Order> Orders { get; set; }
 
+    public List<Product> Inventories { get; set; }
 }
 
 // return sports clothing apparel, sports equipment, shoes

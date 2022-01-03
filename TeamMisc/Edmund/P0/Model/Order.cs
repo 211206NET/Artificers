@@ -18,10 +18,10 @@ public class Order
             foreach(LineItem lineitem in this.LineItems)
             {
                 //multiply the product's price by how many we're buying
-                total += lineitem.Item.Price * lineitem.Quantity;
+                total += lineitem.Quantity;
             }
         }
-        this.Total = total;
+        TotalAmountPlusPrice = total;
         return total;
     }
 }
