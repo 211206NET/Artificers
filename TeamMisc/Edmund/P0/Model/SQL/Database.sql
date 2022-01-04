@@ -18,31 +18,36 @@ USE SportsStore
 -- default (for providing default value)
 
 CREATE TABLE Inventory(
-    InventoryID INT PRIMARY KEY IDENTITY(1, 1),
-    ProductID INT FOREIGN KEY REFERENCES Inventory(ProductID),
+    InventoryID INT PRIMARY KEY IDENTITY,
+    ProductID INT FOREIGN KEY REFERENCES Product(ProductID),
     Quantity INT,
     ProductItem NVARCHAR(100)
 );
 
+SELECT * FROM Inventory
+
 CREATE TABLE LineItem(
     LineItemID INT PRIMARY KEY IDENTITY(1, 1),
-    ProductID INT FOREIGN KEY REFERENCES LineItem(ProductID),
-    OrderID INTEGER,
+    ProductID INT FOREIGN KEY REFERENCES Product(ProductID),
+    OrderID INT,
     Quantity INT
 );
 
-CREATE TABLE Order(
-    OrderID INT PRIMARY KEY IDENTITY(1, 1),
+SELECT * FROM LineItem
+
+
+CREATE TABLE Orders(
+    ID INT PRIMARY KEY IDENTITY,
     OrderDate DATE,
     TotalAmountPlusPrice DECIMAL, 
-    CustomerID INT FOREIGN KEY REFERENCES Order(CustomerID),
-    StoreID NVARCHAR(100) INT FOREIGN KEY REFERENCES Order(StoreID)
+    CustomerID INT,
+    StoreID INT FOREIGN KEY REFERENCES Store(ID)
 );
 
 CREATE TABLE Product(
     ProductID INT PRIMARY KEY IDENTITY(1, 1),
-    ProductName NVARCHAR(100),
-    ProductDescription NVARCHAR(100),
+    ProductName VARCHAR(100),
+    ProductDescription VARCHAR(100),
     Price DECIMAL 
 );
 
@@ -55,12 +60,13 @@ SELECT * FROM Product
 
 
 CREATE TABLE Store(
-    StoreID INT PRIMARY KEY IDENTITY(1, 1),
-    StoreName NVARCHAR(100),
-    City NVARCHAR(100),
-    State NVARCHAR (100),
-    Address NVARCHAR (100)
+    ID INT PRIMARY KEY IDENTITY(1, 1),
+    StoreName VARCHAR(100),
+    City VARCHAR(100),
+    State VARCHAR (100),
+    Address VARCHAR (100)
 );
+SELECT * FROM Store
 
 INSERT INTO Store (StoreName, City, State, Address) VALUES
 ('LA Sports Store', 'Los Angeles', 'CA', '123 Water Street'),
@@ -69,15 +75,17 @@ INSERT INTO Store (StoreName, City, State, Address) VALUES
 
 SELECT * FROM Store
 
-CREATE TABLE User(
+CREATE TABLE Users(
     UserID INT PRIMARY KEY IDENTITY(1, 1),
-    Username NVARCHAR(100),
-    Password NVARCHAR(100),
-    Name NVARCHAR(100),
-    EmployeeNull NVARCHAR(100) FOREIGN KEY REFERENCES User(EmployeeNull),
+    Username VARCHAR(100),
+    Password VARCHAR(100),
+    Name VARCHAR(100),
+    EmployeeNull VARCHAR(100) FOREIGN KEY REFERENCES UserType(EmployeeNull),
 );
 
-CREATE TABLE User Type(
+CREATE TABLE UserType(
     UserTypeID INT PRIMARY KEY IDENTITY(1, 1),
-    EmployeeNull NVARCHAR(100)
+    EmployeeNull VARCHAR(100)
 );
+
+SELECT * FROM UserType
