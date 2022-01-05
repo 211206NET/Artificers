@@ -13,13 +13,31 @@ public class TTBL : IBL
         return _dl.GetAllSubjects();
     }
 
-    public void AddSubject(Subject SubjectToAdd)
+    public void AddSubject(Subject subjectToAdd)
     {
-        _dl.AddSubject(SubjectToAdd);
+        _dl.AddSubject(subjectToAdd);
+    }
+    public void RemoveSubject(Subject subToRemove)
+    {
+        _dl.RemoveSubject(subToRemove);
+    }
+    public List<Question> GetAllQuestions()
+    {
+        return _dl.GetAllQuestions();
     }
 
     public void AddQuestion(Question questionToAdd)
     {
         _dl.AddQuestion(questionToAdd);
+    }
+
+    public void ChangeQuestion(int indexToChange, Question questionToChange)
+    {
+        _dl.ChangeQuestion(indexToChange, questionToChange);
+    }
+
+    public void RemoveQuestion(Question questToRemove)
+    {
+        _dl.RemoveQuestion(questToRemove);
     }
 }

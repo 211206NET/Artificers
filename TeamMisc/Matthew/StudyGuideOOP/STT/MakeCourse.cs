@@ -16,7 +16,7 @@ public void Start() {
     const int Q = 3; //Subjects will have three questions/answers each
     //JSON doesn't like it
     //string[,] qA = new string[4, 2]; //String array to store QA recording from test maker, array length is fixed, so no need for a List<>
-    string q1 = ""; string q2 = ""; string q3 = ""; string a1 = ""; string a2 = ""; string a3 = "";
+    string? q1 = ""; string? q2 = ""; string? q3 = ""; string? a1 = ""; string? a2 = ""; string? a3 = "";
 
 while(!exit)
 {

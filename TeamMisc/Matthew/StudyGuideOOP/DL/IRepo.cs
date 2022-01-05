@@ -15,6 +15,9 @@ public interface IRepo
     //they also lack method body
     List<Subject> GetAllSubjects();
     void AddSubject(Subject SubjectToAdd);
+    void RemoveSubject(Subject subToRemove);
     List<Question> GetAllQuestions();
     void AddQuestion(Question questionToAdd);
+    void ChangeQuestion(int indexToChange, Question questionToChange);
+    void RemoveQuestion(Question questToRemove);
 }

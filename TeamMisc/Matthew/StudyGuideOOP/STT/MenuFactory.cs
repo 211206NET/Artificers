@@ -25,6 +25,9 @@ public static class MenuFactory
             case "makecourse":
                 return new MakeCourse(bl);
             
+            case "changecourse":
+                return new ChangeCourse(bl);
+            
             default:
                 return new MainMenu(bl);
         }

@@ -9,7 +9,7 @@ public MainMenu(IBL bl)
 
 public void Start() {
     bool exit = false;
-    string choose = "";
+    string? choose = "";
     while(!exit)
     {
         List<Subject> allSubjects = _bl.GetAllSubjects();
@@ -17,20 +17,25 @@ public void Start() {
         Console.WriteLine("[a] Add new subject.\n");
         //Get list of subject
         if(allSubjects.Count > 0){
+        Console.WriteLine("[c] Changes to an existing subject.\n");
         for(int i = 0; i < allSubjects.Count; i++)
         {
             Console.WriteLine($"[{i}] {allSubjects[i].SubjectName}");
         }
-        string? input = Console.ReadLine();
         }else{Console.WriteLine("There are no subjects available, press 'a' to add one...");}
+        
         choose = Console.ReadLine();//First check for input "a"
-        if(choose == "a")
+        switch(choose)
         {
+        case "a":
             //Make new subject!
             MenuFactory.GetMenu("makecourse").Start();
-        }
-        else
-        {
+        break;
+        case "c":
+            //Make changes to a subject!
+            if(allSubjects.Count > 0){MenuFactory.GetMenu("changecourse").Start();}
+        break;
+        default:
             int selection;
             bool parseSuccess = Int32.TryParse(choose, out selection); //Check that input is an int
             if(parseSuccess && selection >= 0 && selection < allSubjects.Count)//Check that chosen int is in list range
@@ -39,6 +44,8 @@ public void Start() {
                 MenuFactory.GetMenu("test").Start();
             }
             else{Console.WriteLine("Invalid input!");}
+        
+        break;
         }
         exit = true;
     }

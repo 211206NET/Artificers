@@ -13,6 +13,11 @@ public class StaticStorage : IRepo
         StaticStorage._allSubjects.Add(SubjectToAdd);
     }
 
+    public void RemoveSubject(Subject subToRemove)
+    {
+        StaticStorage._allSubjects.Remove(subToRemove);
+    }
+
     private static List<Question> _allQuestions = new List<Question>();
 
     public List<Question> GetAllQuestions()
@@ -24,5 +29,15 @@ public class StaticStorage : IRepo
     {
         StaticStorage._allQuestions.Add(questionToAdd);
         //StaticStorage._allSubjects[SubjectIndex].Questions.Add(QuestionToAdd);
+    }
+
+    public void ChangeQuestion(int indexToChange, Question questionToChange)
+    {
+        StaticStorage._allQuestions[indexToChange] = questionToChange;
+    }
+
+    public void RemoveQuestion(Question questToRemove)
+    {
+        StaticStorage._allQuestions.Remove(questToRemove);
     }
 }

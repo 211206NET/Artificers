@@ -7,6 +7,7 @@ public class FileRepo : IRepo
 {
     public FileRepo(){}
 
+    //Subjects
     private string filePath = "../DL/Subjects.json";
 
     public List<Subject> GetAllSubjects()
@@ -48,7 +49,15 @@ public class FileRepo : IRepo
         File.WriteAllText(filePath, jsonString);
     }
 
+    public void RemoveSubject(Subject subToRemove)
+    {
+        List<Subject> allSubjects = GetAllSubjects();
+        allSubjects.Remove(subToRemove);
+        string jsonString = JsonSerializer.Serialize(allSubjects);
+        File.WriteAllText(filePath, jsonString);
+    }
 
+    //Questions
     private string filePathQ = "../DL/Questions.json";
 
     public List<Question> GetAllQuestions()
@@ -75,6 +84,23 @@ public class FileRepo : IRepo
         List<Question> allQuestions = GetAllQuestions();
         allQuestions.Add(questionToAdd);
 
+        string jsonString = JsonSerializer.Serialize(allQuestions);
+        File.WriteAllText(filePathQ, jsonString);
+    }
+
+    public void ChangeQuestion(int indexToChange, Question questionToChange)
+    {
+        List<Question> allQuestions = GetAllQuestions();
+        allQuestions[indexToChange] = questionToChange;
+
+        string jsonString = JsonSerializer.Serialize(allQuestions);
+        File.WriteAllText(filePathQ, jsonString);
+    }
+
+    public void RemoveQuestion(Question questToRemove)
+    {
+        List<Question> allQuestions = GetAllQuestions();
+        allQuestions.Remove(questToRemove);
         string jsonString = JsonSerializer.Serialize(allQuestions);
         File.WriteAllText(filePathQ, jsonString);
     }
