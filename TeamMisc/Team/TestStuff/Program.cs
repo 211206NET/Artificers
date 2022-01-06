@@ -1,11 +1,108 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+//using TestThingsAndStuff;
+//namespace TestThingsAndStuff;
 
 //A safe zone to make huge mistakes
 Console.WriteLine("Test stuff here");
+Console.WriteLine("\n");//Spacer
 
-//4 mod 3 -> 1 G ???
+
+
+
+
+//============= CAFFEINE =============\\
+
+/*Caffeine use causes sleep deprivation, and sleep deprivation causes sleepiness the subsequent day, 
+which in turn causes an increased need to consume more caffeine in order to cope with the sleepiness. 
+Even with increased caffeine consumption, sleep deprivation catches up
+
+If 100mg of caffeine consumed in one day can compromise good REM sleep by 1 hour a night and every 
+additional 50mg will increase the sleep loss by a factor of 20%, return how much caffeine is needed 
+to completely destroy your ability to sleep a standard 8 hour session.*/
+
+int caffeineMG = 100; //The amount of caffeine consumed in one day
+float compoundLoss = 0.0f; //The additional penalty for every 50 mg after the first 100 mg
+//Console.WriteLine($"{caffeineMG+(caffeineMG*compoundLoss)}");
+const int sleepNeeded = 8; //A constant value of how much sleep one needs in a night to be healthy
+int remainingSegments = 0; //How many half hours 50mg attack segments exists after the first hour?
+
+//Get value of remainingSegments after first hour
+remainingSegments = ((sleepNeeded*100)-100)/50;
+
+//Determine the rate of compound sleep loss from excessive caffeine
+for(int i = 1; i<remainingSegments; i++)
+{
+    if((compoundLoss*caffeineMG)+caffeineMG < sleepNeeded*100)
+    {
+        //Set the caffeine needed
+        caffeineMG += 50;
+        compoundLoss = compoundLoss+(0.2f); //Compound the loss factor
+        
+        //Console.WriteLine($"(compoundLoss*caffeineMG)+caffeineMG: {(compoundLoss*caffeineMG)+caffeineMG}, compoundLoss: {compoundLoss}, caffeineMG: {caffeineMG}");
+    }else{break;}
+}
+
+Console.WriteLine($"{caffeineMG}mg of caffeine a day is needed to destroy all of your sleep"); //Returns 400mg
+
+
+Console.WriteLine("\n\nEnter anything to continue test results\n");
+Console.ReadLine(); //Pause after test
+
+
+
+//============= CASTING PRACTICE =============\\
+//Converting value types
 double testDub = 99.67;
+/*
+    In C#, there are two types of casting:
+
+    Implicit Casting (automatically) - converting a smaller type to a larger type size
+    char -> int -> long -> float -> double
+    Implicit casting is done automatically when passing a smaller size type to a larger size type:
+    double testDub = myInt;
+
+    Explicit Casting (manually) - converting a larger type to a smaller size type
+    double -> float -> long -> int -> char
+    Explicit casting must be done manually by placing the type in parentheses in front of the value:
+    int myInt = (int) testDub;  
+*/
+
+//Some Casting
+Console.WriteLine($"initial testDub: {testDub}");
+int myInt = (int) testDub; //Will round the double to a whole number
+Console.WriteLine($"myInt: value from double: {myInt}");
+testDub = myInt; //Will implicitly set the double value to the int
+Console.WriteLine($"testDub: value back from int: {testDub}");
+float myFloat = (float) testDub; 
+Console.WriteLine($"myFloat: value taken from double: {myFloat}");
+myFloat += 0.4f; //When changing values to a float, you must add f at the end
+testDub = myFloat; //The double accepts the float value no problem as double is a larger type
+Console.WriteLine($"testDub: value taken from modified float: {testDub}");
+
+//Store the int equivalent of each char into an int array
+int[] alphaInt = new int[26];
+
+//Store the alphabet into a char array
+string abc = "a b c d e f g h i j k l m n o p q r s t u v w x y z"; //The given input for the alphabet
+//Add the alphabet string to a string array, this treats each space in the given string as a new position int he array
+string[] tokensABC = abc.Split(' '); 
+char[] alphaChar = new char[26]; //This is the char array that will store the letters from the string array
+for(int i = 0; i < 26; i++) //Loop 26 times for each letter in alphabet
+{
+    alphaChar[i] = Convert.ToChar(tokensABC[i]); //set chararray to string array values by converting to char 
+    Console.Write($"{alphaChar[i]} "); 
+    alphaInt[i] = alphaChar[i];  //Finally set the int array from the char array
+    Console.Write($"{alphaInt[i]} "); //Returns a line with each letter followed by char numeric value
+    //Because char to int is smaller to larger size value type conversion this is implicit casting with no data loss
+}
+
+
+Console.WriteLine("\n\nEnter anything to continue test results\n");//Spacer
+Console.ReadLine(); //Stop results until something is entered
+
+//============= STRING PRACTICE =============\\
+//String Stuff
 string elevenlttrs = "eleven_lttrs";
 Console.WriteLine($"elevenlttrs: {elevenlttrs.Length} what is the 6th letter in the string {elevenlttrs[5]}");
 Console.WriteLine(elevenlttrs[0]);
@@ -33,9 +130,10 @@ if (elevenlttrs.StartsWith("ele"))
 }
 
 
-Console.WriteLine("\n");
+Console.WriteLine("\n\nEnter anything to continue test results\n");
+Console.ReadLine();
 
-//Loops
+//============= LOOPS =============\\
 /*
 */
 
@@ -111,12 +209,10 @@ foreach(int i in nums)
     Console.Write(i + " ");
 }
 
-Console.WriteLine("\n");
-
-
+Console.WriteLine("\n\nEnter anything to continue test results\n");
 Console.ReadLine();
 
-
+//============= PRACTICE QUESTION: NAME EQUITY =============\\
 //Practice Question
 List<string> PracticeList = new List<string>();
 List<string> TempList = new List<string>();
@@ -179,7 +275,7 @@ PracticeList.Add("Tracy");
     }
 
 
-
+Console.WriteLine("\n\nEnter anything to continue test results\n");
 Console.ReadLine();
 
 
@@ -204,7 +300,8 @@ Console.WriteLine(newSignals);
 
 Console.WriteLine($"2%3: {2 % 3}"); //modulate test   2%3 = 2, 3%3 = 0, 4%3 = 1
 
-Console.ReadLine(); //Pause after test
+Console.WriteLine("\n\nEnter anything to continue test results\n");//Spacer
+Console.ReadLine(); //Stop results until something is entered
 
 
 
@@ -214,12 +311,35 @@ string returnInt = "3 5";
 string[] tokens = returnInt.Split(' ');
 Console.WriteLine($"tokens: {tokens[0]} {tokens[1]}");
 
-
+Console.WriteLine("\n\nEnter anything to continue test results\n");
 Console.ReadLine(); //Pause after test
 
+
+
+//============= Modulus =============\\
+//4 mod 3 -> 1 G ???
+
+//Input a number to change the seasons, 1 = one season change
+List<string> seasons = new List<string>{"Spring","Summer","Fall","Winter"};//Gives us numbers for color
+int curSeason = 3;
+int seasonChange = 2;
+
+Console.WriteLine($"The season begins as {seasons[curSeason]} and it will now move forward {seasonChange} seasons");
+//Console.WriteLine($"5%4: {5 % 4}"); //Returns 1 //modulate test   2%3 = 2, 3%3 = 0, 4%3 = 1
+Console.WriteLine($"The resulting season is now {seasons[(curSeason+seasonChange)%4]}");//Useful for looping through an array with cyclic data
+
+Console.WriteLine("\n\nEnter anything to continue test results\n");
+Console.ReadLine(); //Pause after test
 
 
 //============= NEXT =============\\
 
 
+
+
+
+Console.WriteLine("\n\nEnter anything to continue test results\n");
 Console.ReadLine(); //Pause after test
+
+
+

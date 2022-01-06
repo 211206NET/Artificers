@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\khyri\\Revature\\NETFS\\PersonalTests\\TestStuff\\TestStuff.csproj",
+      "projectUniqueName": "C:\\Users\\khyri\\Revature\\NETFS\\team-Artificers\\TeamMisc\\Team\\TestStuff\\TestStuff.csproj",
       "projectName": "TestStuff",
-      "projectPath": "C:\\Users\\khyri\\Revature\\NETFS\\PersonalTests\\TestStuff\\TestStuff.csproj",
+      "projectPath": "C:\\Users\\khyri\\Revature\\NETFS\\team-Artificers\\TeamMisc\\Team\\TestStuff\\TestStuff.csproj",
       "packagesPath": "C:\\Users\\khyri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khyri\\Revature\\NETFS\\PersonalTests\\TestStuff\\obj\\",
+      "outputPath": "C:\\Users\\khyri\\Revature\\NETFS\\team-Artificers\\TeamMisc\\Team\\TestStuff\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khyri\\AppData\\Roaming\\NuGet\\NuGet.Config",
