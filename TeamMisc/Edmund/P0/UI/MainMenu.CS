@@ -4,7 +4,7 @@ using BL;
 
 namespace UI;
 
-public class MainMenu
+public class MainMenu : IMenu
 {
     private IBL _bl;
 
@@ -42,10 +42,7 @@ public class MainMenu
                         Console.WriteLine("1. Log in to Profile (Existing Users)");
                     }
                     Console.WriteLine("2. Sign Up as a New User");
-                    if (credentialsRight == true)
-                    {
-                        Console.WriteLine("3. Employees Log in Here");
-                    }
+                    Console.WriteLine("3. Employees Log in Here");
                     Console.WriteLine("4. Select a Store");
                     Console.WriteLine("5. View our Store Inventory");
                     Console.WriteLine("6. Exit");
@@ -146,7 +143,7 @@ public class MainMenu
                     if (credentialsRight == true && manager == true)
                     {
                         // if credentials are right -> user can view order history or order existing inventory
-                        ManagementMenu menu = new ManagementMenu();
+                        ManagementMenu menu = new ManagementMenu(_bl);
                         menu.Start();
                     }
                     else
@@ -184,7 +181,7 @@ public class MainMenu
                 // option to view store inventory
                 case "5":
                     Console.WriteLine("Welcome to Store Inventory. Please select a Store");
-            
+
                     //For now, we can have a prefilled list of stores with inventories to stub data out until we get our DB going
                     allStores = _bl.GetAllStores();
                     Console.WriteLine($"{allStores.Count}");
@@ -192,7 +189,7 @@ public class MainMenu
                     {
                         Console.WriteLine($"[{i}], {allStores[i].StoreName}");
                     }
-                    string choice = Console.ReadLine();                   
+                    string choice = Console.ReadLine();
                     int a = 0;    // int a used for tryparse below
                     bool res = false;  // used to check for true/false
                     res = Int32.TryParse(choice, out a);   //checks if string value is integer
@@ -201,18 +198,20 @@ public class MainMenu
                         Console.WriteLine($"You chose number {choice}, Please choose a Product");
                         // here the customer will browse inventory
                         int choiceInt = Int32.Parse(choice);
-                        for(int i = 0; i < allStores[choiceInt].Inventories.Count; i++){
+                        for (int i = 0; i < allStores[choiceInt].Inventories.Count; i++)
+                        {
                             Console.WriteLine($"[{i}], {allStores[choiceInt].Inventories[i].ProductName}," +
                             $"\n {allStores[choiceInt].Inventories[i].Description}" +
                             $"\n {allStores[choiceInt].Inventories[i].Price}");
                         }
                         choice = Console.ReadLine();
                     }
-                    else{           // user types something other than number
+                    else
+                    {           // user types something other than number
                         Console.WriteLine("Invalid Input");
                     }
 
-                    
+
                     //later, i'm going to replace this with query to DB to get all stores
                     // for (int i = 1; i < allStores.Count; i++)
                     // {

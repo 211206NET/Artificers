@@ -1,10 +1,15 @@
 using Models;
 using DL;
+using BL;
 
 namespace UI;
 
-public class ManagementMenu
-{
+public class ManagementMenu : IMenu
+{ 
+private IBL _bl;   
+public ManagementMenu(IBL bl){
+    _bl = bl;
+}
 public void Start(){
 
 bool exit= false;

@@ -22,6 +22,9 @@ public class Store {
     public List<Order> Orders { get; set; }
 
     public List<Product> Inventories { get; set; }
-}
 
-// return sports clothing apparel, sports equipment, shoes
+    public override string ToString()
+    {
+        return $"StoreID: {this.StoreID} \nStoreName: {this.StoreName} \nCity: {this.City} \nState: {this.State}";
+    }
+}
