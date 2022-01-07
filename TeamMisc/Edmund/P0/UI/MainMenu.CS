@@ -4,7 +4,7 @@ using BL;
 
 namespace UI;
 
-public class MainMenu
+public class MainMenu : IMenu
 {
     private IBL _bl;
 
@@ -20,12 +20,15 @@ public class MainMenu
 
     public void Start()
     {
+        List<Store> allStores = _bl.GetAllStores();
+
+
         bool exit = false;
         bool credentialsRight = false;
         bool manager = false;
         string existingUsername = "";
         string existingPassword = "";
-        string input = "4";
+        string input = "0";
 
         while (!exit)
         {
@@ -39,10 +42,7 @@ public class MainMenu
                         Console.WriteLine("1. Log in to Profile (Existing Users)");
                     }
                     Console.WriteLine("2. Sign Up as a New User");
-                    if (credentialsRight == true)
-                    {
-                        Console.WriteLine("3. Employees Log in Here");
-                    }
+                    Console.WriteLine("3. Employees Log in Here");
                     Console.WriteLine("4. Select a Store");
                     Console.WriteLine("5. View our Store Inventory");
                     Console.WriteLine("6. Exit");
@@ -143,7 +143,7 @@ public class MainMenu
                     if (credentialsRight == true && manager == true)
                     {
                         // if credentials are right -> user can view order history or order existing inventory
-                        ManagementMenu menu = new ManagementMenu();
+                        ManagementMenu menu = new ManagementMenu(_bl);
                         menu.Start();
                     }
                     else
@@ -157,10 +157,10 @@ public class MainMenu
 
                 // extend 4 and 5 for store selection
                 case "4":
-                    List<Store> stores = new List<Store>();
-                    _bl.GetAllStores();
+                    // List<Store> stores = new List<Store>();
+                    allStores = _bl.GetAllStores();
                     Console.WriteLine("Please select a store to shop from \n");
-                    if (stores.Count > 0)
+                    if (allStores.Count > 0)
                     {
                         // for (int i = 0; i < stores.Count; i++)
                         // {
@@ -169,7 +169,7 @@ public class MainMenu
                         // $"State: {StaticStorage.GetAllStores()[i].State}");
                         // }
 
-                        foreach (Store store in stores)
+                        foreach (Store store in allStores)
                         {
                             System.Console.WriteLine(store);
                         }
@@ -181,31 +181,62 @@ public class MainMenu
                 // option to view store inventory
                 case "5":
                     Console.WriteLine("Welcome to Store Inventory. Please select a Store");
+
                     //For now, we can have a prefilled list of stores with inventories to stub data out until we get our DB going
-                    List<Store> allStores = new List<Store>(); //later, i'm going to replace this with query to DB to get all stores
-                    for (int i = 1; i <= 5; i++)
+                    allStores = _bl.GetAllStores();
+                    Console.WriteLine($"{allStores.Count}");
+                    for (int i = 0; i < allStores.Count; i++)
                     {
-                        Store storeToAdd = new Store();
-                        storeToAdd.StoreName = "Store " + i;
-                        storeToAdd.StoreNumber = i;
-                        //storeToAdd.Inventories = new List<Inventory>();
-
-                        for (int j = 0; j < 4; j++)
-                        {
-                            Product prod = new Product();
-                            prod.ProductName = "Product " + j;
-                            prod.Price = 9.99M;
-                            prod.Description = "product " + j + " description";
-
-                            Inventory inven = new Inventory();
-                            inven.Item = prod;
-                            inven.Quantity = 10;
-
-                            //storeToAdd.Inventories.Add(inven);
-                        }
-
-                        allStores.Add(storeToAdd);
+                        Console.WriteLine($"[{i}], {allStores[i].StoreName}");
                     }
+                    string choice = Console.ReadLine();
+                    int a = 0;    // int a used for tryparse below
+                    bool res = false;  // used to check for true/false
+                    res = Int32.TryParse(choice, out a);   //checks if string value is integer
+                    if (res == true)   //it is numeric
+                    {
+                        Console.WriteLine($"You chose number {choice}, Please choose a Product");
+                        // here the customer will browse inventory
+                        int choiceInt = Int32.Parse(choice);
+                        for (int i = 0; i < allStores[choiceInt].Inventories.Count; i++)
+                        {
+                            Console.WriteLine($"[{i}], {allStores[choiceInt].Inventories[i].ProductName}," +
+                            $"\n {allStores[choiceInt].Inventories[i].Description}" +
+                            $"\n {allStores[choiceInt].Inventories[i].Price}");
+                        }
+                        choice = Console.ReadLine();
+                    }
+                    else
+                    {           // user types something other than number
+                        Console.WriteLine("Invalid Input");
+                    }
+
+
+                    //later, i'm going to replace this with query to DB to get all stores
+                    // for (int i = 1; i < allStores.Count; i++)
+                    // {
+                    //     Store storeToAdd = new Store();
+                    //     storeToAdd.StoreName = "Store " + i;
+                    //     storeToAdd.StoreID = i;
+                    //     //storeToAdd.Inventories = new List<Inventory>();
+
+
+                    //     for (int j = 0; j < 4; j++)
+                    //     {
+                    //         Product prod = new Product();
+                    //         prod.ProductName = "Product " + j;
+                    //         prod.Price = 9.99M;
+                    //         prod.Description = "product " + j + " description";
+
+                    //         Inventory inven = new Inventory();
+                    //         inven.Item = prod;
+                    //         inven.Quantity = 10;
+
+                    //         //storeToAdd.Inventories.Add(inven);
+                    //     }
+
+                    //     allStores.Add(storeToAdd);
+                    // }
                     //At the end of this loop, we should have 5 stores in our allStores List with 4 products in its inventory each
 
 
