@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Models;
+using System.Data;
 
 namespace DL;
 
@@ -12,6 +13,43 @@ public class DBRepo : IRepo
         Console.WriteLine(_connectionString);
     }
 
+
+    public void AddStore(Store storeToAdd)
+    {
+        string selectCmd = "SELECT" FROM STORE";
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+
+        
+            using(SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCmd,_connectionString))
+            {
+            DataSet stoSet = new DataSet();
+            dataAdapter.Fill(stoSet, "Store");
+
+            DataTable stoTable = stoSet.Tables["Store"];
+
+            // foreach(DataRow row in stoTable.Rows)
+            // {
+            //     Console.WriteLine(row["Id"]);
+            // }
+
+            DataRow newRow = stoTable.NewRow();
+            newRow["Name"] = storeToAdd.Name;
+            newRow["City"] = storeToAdd.City ?? "";
+            newRow["State"] = storeToAdd.State ?? "";
+
+            stoTable.Rows.Add(newRow);
+
+            string insertCmd = $"INSERT INTO Store (Name, City, State) VALUES (' {storeToAdd.Name}', '{storeToAdd.City}', '{storeToAdd.State}')";
+
+            dataAdapter.InsertCommand = new SqlCommand(insertCmd, connection);
+
+
+            dataAdapter.Update(stoTable);
+
+            }
+        }
+    }
     public List<Store> GetAllStores()
     {
         List<Store> allStore = new List<Store>();
