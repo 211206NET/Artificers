@@ -1,0 +1,1 @@
+Server=tcp:database-1.cncv5lwgiqky.us-east-2.rds.amazonaws.com,1433;Initial Catalog=SportsStore;User ID=admin;Password=pa$$word123;Encrypt=False;

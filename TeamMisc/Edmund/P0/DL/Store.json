@@ -1,0 +1,11 @@
+[
+    {
+        "StoreName": "Los Angeles Store",
+        "StoreNumber": 1,
+        "City": "Los Angeles",
+        "State": "CA",
+        "Address": "123 Terrace",
+        "Inventory": null,
+        "Order": null
+    }
+]
