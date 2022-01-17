@@ -89,13 +89,13 @@ while(!exit) //Main Loop
     {
         sI = testOrder[i]; //First random number in random array
         if(allCards[sI].TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && allCards[sI].AvgScore < 0.8m))){
-
-        Console.WriteLine($"\nQuestion: {allCards[sI].Question}\n");
-        Console.WriteLine($"Take time to answer the question from memory, press anything to flip the card. Current score: {allCards[sI].AvgScore}\n");
+        Console.WriteLine("-------------------------------------------------------------------------------------");
+        Console.WriteLine($"Question: {allCards[sI].Question}\n");
+        Console.WriteLine($"\tTake time to answer the question from memory, press anything to flip the card. Current score: {allCards[sI].AvgScore}\n");
         Console.ReadLine();
         Console.WriteLine($"Answer: {allCards[sI].Answer}\n");
         
-        Console.WriteLine("How did you do? 'a' = perfect, 'b' = good, 'c' = ok, 'd' = not so well, 'f' = need to study\n");
+        Console.WriteLine("\tHow did you do? 'a' = perfect, 'b' = good, 'c' = ok, 'd' = not so well, 'f' = need to study\n");
         
         string? grade = "";
 
