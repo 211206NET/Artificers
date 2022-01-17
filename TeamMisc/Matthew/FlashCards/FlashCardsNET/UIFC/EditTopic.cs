@@ -274,7 +274,7 @@ void SetTopicScore(string topNameVar, int score)
     {
         Name = topNameVar,
         OverallScore = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
-        AvgScore = 0
+        AvgScore = score
     };
     
     _bl.TopicScoreSet(tp);
@@ -283,7 +283,7 @@ void SetTopicScore(string topNameVar, int score)
     {
         TopicName = topNameVar,
         Success = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
-        AvgScore = 0
+        AvgScore = score
     };
 
     _bl.CardScoreSet(cd);
