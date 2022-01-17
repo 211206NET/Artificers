@@ -176,12 +176,15 @@ while(!exit) //Main Loop
     //Finalize average for deck this session
     
     //Console.WriteLine($"totalRunning: {totalRunning}, cardsInDeck: {cardsInDeck}"); //DEBUG
-    totalRunning = Math.Round(totalRunning/cardsInDeck, 2);
+    if(cardsInDeck>0){totalRunning = Math.Round(totalRunning/cardsInDeck, 2);}else{totalRunning = 1;}
     //Console.WriteLine($"totalRunning: {totalRunning}"); //DEBUG
 
     //Return average overall score for this deck
     //Tally score
-    dumpQueue = allTopic[topicIndex].OverallScore;
+
+    dumpQueue = allTopic[topicIndex].OverallScore; //Setting Queue to queue
+
+
     //Console.WriteLine($"allTopic[topicIndex].OverallScore.Count: {allTopic[topicIndex].OverallScore.Count}"); //DEBUG
     //Console.ReadLine(); //DEBUG
 
