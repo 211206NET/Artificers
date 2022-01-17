@@ -98,6 +98,24 @@ public class FileRepo : IRepo
         File.WriteAllText(filePathT, jsonString);
     }
 
+    //Set the topic to a score
+    public void TopicScoreSet(Topic set)
+    {
+        List<Topic> allTopics = GetAllTopics();
+        for(int i = allTopics.Count-1; i > -1; i--)
+        {
+            if(allTopics[i].Name == set.Name)
+            {
+                allTopics[i].OverallScore = set.OverallScore;
+                allTopics[i].AvgScore = set.AvgScore;
+            }
+        }
+
+        string jsonString = JsonSerializer.Serialize(allTopics);
+        File.WriteAllText(filePathT, jsonString);
+    }
+
+
 
 
     //===================  CARDS
@@ -235,6 +253,23 @@ public class FileRepo : IRepo
         }
 
         string jsonString = JsonSerializer.Serialize(allCards);
+        File.WriteAllText(filePath, jsonString);
+    }
+
+    //Set the card to a score
+    public void CardScoreSet(Card set)
+    {
+        List<Card> allcards = GetAllCards();
+        for(int i = allcards.Count-1; i > -1; i--)
+        {
+            if(allcards[i].TopicName == set.TopicName)
+            {
+                allcards[i].Success = set.Success;
+                allcards[i].AvgScore = set.AvgScore;
+            }
+        }
+
+        string jsonString = JsonSerializer.Serialize(allcards);
         File.WriteAllText(filePath, jsonString);
     }
 

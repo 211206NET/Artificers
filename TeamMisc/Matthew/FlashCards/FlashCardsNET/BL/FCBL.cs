@@ -47,6 +47,13 @@ public class FCBL : IBL
         _dl.DestroyTopic(topicName);
     }
 
+    public void TopicScoreSet(Topic set)
+    {
+        _dl.TopicScoreSet(set);
+    }
+
+
+
     //CARDS
 
     /// <summary>
@@ -100,5 +107,10 @@ public class FCBL : IBL
     public void EditCard(Card cardInfo)
     {
         _dl.EditCard(cardInfo);
+    }
+
+    public void CardScoreSet(Card set)
+    {
+        _dl.CardScoreSet(set);
     }
 }

@@ -68,6 +68,8 @@ while(!exit) //Main Loop
     Console.WriteLine($"[1] Make a list of all flashcards in the deck to choose which one to edit from");// 
     Console.WriteLine($"[2] Go through each question one by one");// 
     Console.WriteLine($"[3] Add cards to topic");// 
+    Console.WriteLine($"[4] Reset score of topic and all cards to 0");// 
+    Console.WriteLine($"[5] Set score of topic and all cards to 1 (mark as finished)");// 
     Console.WriteLine($"[delete] Type delete to permanently remove entire topic and all cards within it");// 
     Console.WriteLine($"[b] Return to main menu\n");// 
 
@@ -85,6 +87,14 @@ while(!exit) //Main Loop
 
         case "3":
             AddMoreCards(topName);
+        break;
+
+        case "4":
+            SetTopicScore(topName, 0);
+        break;
+
+        case "5":
+            SetTopicScore(topName, 1);
         break;
 
         case "delete":
@@ -253,6 +263,32 @@ void AddMoreCards(string topNameVar)
         if(choose != "y"){exit = true;}
     }
 
+}
+
+void SetTopicScore(string topNameVar, int score)
+{
+    List<Topic> allTopic = _bl.GetAllTopics();
+    List<Card> allCards = _bl.GetAllCards();
+    
+    Topic tp = new Topic
+    {
+        Name = topNameVar,
+        OverallScore = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
+        AvgScore = 0
+    };
+    
+    _bl.TopicScoreSet(tp);
+
+    Card cd = new Card
+    {
+        TopicName = topNameVar,
+        Success = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
+        AvgScore = 0
+    };
+
+    _bl.CardScoreSet(cd);
+
+    Console.WriteLine($"Score for {topNameVar} set to {score}");
 }
 
 void DeleteTopic(int topIndex)
