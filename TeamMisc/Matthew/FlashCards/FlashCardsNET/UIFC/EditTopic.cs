@@ -58,15 +58,16 @@ while(!exit) //Main Loop
             Console.WriteLine("Invalid input"); //Wrong input
         }
         else
-        {exit = true;}//Return to main menu
+        {exit = true; break;}//Return to main menu
     }
 
-
+    string topName = allTopic[topicIndex].Name ?? "";
     //Edit Topic Menu
     while(!exit2){
-    Console.WriteLine($"You chose topicIndex: {allTopic[topicIndex].Name} to edit\n<>--------------------------------------------------------------<>");// 
+    Console.WriteLine($"You chose topicIndex: {topName} to edit\n<>--------------------------------------------------------------<>");// 
     Console.WriteLine($"[1] Make a list of all flashcards in the deck to choose which one to edit from");// 
     Console.WriteLine($"[2] Go through each question one by one");// 
+    Console.WriteLine($"[3] Add cards to topic");// 
     Console.WriteLine($"[delete] Type delete to permanently remove entire topic and all cards within it");// 
     Console.WriteLine($"[b] Return to main menu\n");// 
 
@@ -75,15 +76,20 @@ while(!exit) //Main Loop
     switch(choose)
     {
         case "1":
-            MakeCardList(allTopic[topicIndex].Name);
+            MakeCardList(topName);
         break;
 
         case "2":
-            IterateThroughCards(allTopic[topicIndex].Name);
+            IterateThroughCards(topName);
+        break;
+
+        case "3":
+            AddMoreCards(topName);
         break;
 
         case "delete":
             DeleteTopic(topicIndex);
+            exit2 = true;
         break;
 
         case "b":
@@ -205,6 +211,47 @@ void IterateThroughCards(string topNameVar)
         _bl.EditCard(saveCard);
         }//End check deck
     }//End loop
+
+}
+
+void AddMoreCards(string topNameVar)
+{
+    //Add a new card to topic
+    List<Card> allCards = _bl.GetAllCards();
+    string? choose = "";
+    bool exit = false;
+    string? q = "";
+    string? a = "";
+    int deckCount = 1;
+    //Get Deck Count
+    foreach(Card countCard in allCards){deckCount++;}
+
+    while(!exit){
+        
+        foreach(Card countCard in allCards)
+        {if(countCard.CardId == deckCount){deckCount++;}}//Again loop to check Id is unique
+
+        Console.WriteLine("Enter a new question for card");
+        q = Console.ReadLine();
+        Console.WriteLine("Enter an answer for the question you just made");
+        a = Console.ReadLine();
+
+        //Add the new card to the topic
+        Card cardAdd = new Card{
+            CardId = deckCount,
+            TopicName = topNameVar,
+            Question = q,
+            Answer = a,
+            Used = false,
+            Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
+            AvgScore = 0
+        };
+        _bl.AddCard(cardAdd);
+
+        Console.WriteLine($"[y/n] Make another card for this topic {topNameVar}?");
+        choose = Console.ReadLine();
+        if(choose != "y"){exit = true;}
+    }
 
 }
 

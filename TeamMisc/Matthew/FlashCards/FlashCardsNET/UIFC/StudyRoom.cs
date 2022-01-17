@@ -21,6 +21,7 @@ List<Topic> allTopic = _bl.GetAllTopics();
 List<Card> allCards = _bl.GetAllCards();
 bool exit = false; //To terminate main loop
 int topicIndex = -1;
+bool siegeMode = false; //Only show questions that have a score below 80
 while(!exit) //Main Loop
 {
     allTopic = _bl.GetAllTopics();
@@ -28,15 +29,6 @@ while(!exit) //Main Loop
     //Study menu
     Console.WriteLine("Choose a topic from the list, to 'b' to exit");
     for(int i = 0; i < allTopic.Count; i++){
-        //Calculate overall topic score, until you try the course 5 times you can't have a perfect score
-        // decimal score = ((
-        //     allTopic[i].OverallScore[0]
-        //     +allTopic[i].OverallScore[1]
-        //     +allTopic[i].OverallScore[2]
-        //     +allTopic[i].OverallScore[3]
-        //     +allTopic[i].OverallScore[4]
-        //     )/5);
-
         //Show Topic Choice
         Console.WriteLine($"[{i}] {allTopic[i].Name}, Score: {Math.Round(allTopic[i].AvgScore*100,0)}/100");
     }
@@ -82,18 +74,26 @@ while(!exit) //Main Loop
     }
 
     
+    //Set Siege Mode!
+    siegeMode = false;
+    Console.WriteLine("[y/n] Do you only want to focus on cards that you scored less than 80 on?");
+    choose = Console.ReadLine() ?? "";
+    if(choose == "y")
+    {siegeMode = true;}
+
     decimal studySuccess = 0;
-    bool gradeGood = false;
+    bool gradeGood = false; int sI = 0;
     //Study time!  topicIndex  by testOrder
-    foreach(Card crd in allCards)
+    //foreach(Card crd in allCards)
+    for(int i = 0; i < testOrder.Length; i++)
     {
+        sI = testOrder[i]; //First random number in random array
+        if(allCards[sI].TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && allCards[sI].AvgScore < 0.8m))){
 
-        if(crd.TopicName == allTopic[topicIndex].Name){
-
-        Console.WriteLine($"\nQuestion: {crd.Question}\n");
-        Console.WriteLine($"Take time to answer the question from memory, press anything to flip the card. Current score: {crd.AvgScore}\n");
+        Console.WriteLine($"\nQuestion: {allCards[sI].Question}\n");
+        Console.WriteLine($"Take time to answer the question from memory, press anything to flip the card. Current score: {allCards[sI].AvgScore}\n");
         Console.ReadLine();
-        Console.WriteLine($"Answer: {crd.Answer}\n");
+        Console.WriteLine($"Answer: {allCards[sI].Answer}\n");
         
         Console.WriteLine("How did you do? 'a' = perfect, 'b' = good, 'c' = ok, 'd' = not so well, 'f' = need to study\n");
         
@@ -138,7 +138,7 @@ while(!exit) //Main Loop
         //crd.Success.Dequeue(); //DEBUG
         //Console.WriteLine($"crd.Success.Count: {crd.Success.Count}, crd.CardId: {crd.CardId}"); //DEBUG
         //Console.ReadLine(); //DEBUG
-        _bl.ChangeCard(crd.CardId, studySuccess);
+        _bl.ChangeCard(allCards[sI].CardId, studySuccess);
         //allCards = _bl.GetAllCards(); //DEBUG
         }
 
@@ -150,7 +150,7 @@ while(!exit) //Main Loop
     foreach(Card cardScore in allCards)
     {
         //Each card
-        if(cardScore.TopicName == allTopic[topicIndex].Name){
+        if(cardScore.TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && cardScore.AvgScore < 0.8m))){
             cardsInDeck += 1;
             dumpQueue = cardScore.Success;
             //Console.WriteLine($"dumpQueue.Count: {dumpQueue.Count}, cardScore.CardId: {cardScore.CardId}, cardScore.Success.Count: {cardScore.Success.Count}"); //DEBUG
