@@ -98,23 +98,6 @@ public class FileRepo : IRepo
         File.WriteAllText(filePathT, jsonString);
     }
 
-    //Set the topic to a score
-    public void TopicScoreSet(Topic set)
-    {
-        List<Topic> allTopics = GetAllTopics();
-        for(int i = allTopics.Count-1; i > -1; i--)
-        {
-            if(allTopics[i].Name == set.Name)
-            {
-                allTopics[i].OverallScore = set.OverallScore;
-                allTopics[i].AvgScore = set.AvgScore;
-            }
-        }
-
-        string jsonString = JsonSerializer.Serialize(allTopics);
-        File.WriteAllText(filePathT, jsonString);
-    }
-
 
 
 
@@ -206,21 +189,21 @@ public class FileRepo : IRepo
     }
 
     //For changes done at end of study session
-    public void TallyCard(int cardId, decimal avg)
-    {
-        List<Card> allCards = GetAllCards();
-        foreach(Card cardo in allCards)
-        {
-            if(cardo.CardId == cardId)
-            {
-                cardo.AvgScore = avg;
-                break;
-            }
-        }
+    // public void TallyCard(int cardId, decimal avg)
+    // {
+    //     List<Card> allCards = GetAllCards();
+    //     foreach(Card cardo in allCards)
+    //     {
+    //         if(cardo.CardId == cardId)
+    //         {
+    //             cardo.AvgScore = avg;
+    //             break;
+    //         }
+    //     }
 
-        string jsonString = JsonSerializer.Serialize(allCards);
-        File.WriteAllText(filePath, jsonString);
-    }
+    //     string jsonString = JsonSerializer.Serialize(allCards);
+    //     File.WriteAllText(filePath, jsonString);
+    // }
 
     //Removes card from deck one by one when deleteing a topic
     public void DestroyCard(string topicName)
@@ -256,22 +239,62 @@ public class FileRepo : IRepo
         File.WriteAllText(filePath, jsonString);
     }
 
-    //Set the card to a score
-    public void CardScoreSet(Card set)
+
+    //Scores
+    private string filePathS = "../DL/Score.json";
+    
+    public List<Score> GetAllScores()
     {
-        List<Card> allcards = GetAllCards();
-        for(int i = allcards.Count-1; i > -1; i--)
+        string jsonString = "";
+        try
         {
-            if(allcards[i].TopicName == set.TopicName)
+            jsonString = File.ReadAllText(filePathS);
+        }
+        catch(FileNotFoundException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        return JsonSerializer.Deserialize<List<Score>>(jsonString) ?? new List<Score>();
+    }
+
+    //Set the topic to a score
+    public void TopicScoreSet(Score set)
+    {
+        List<Score> allScores = GetAllScores();
+        for(int i = allScores.Count-1; i > -1; i--)
+        {
+            if(allScores[i].ParentId == set.ParentId)
             {
-                allcards[i].Success = set.Success;
-                allcards[i].AvgScore = set.AvgScore;
+                allScores[i].Success = set.Success;
+                allScores[i].AvgScore = set.AvgScore;
             }
         }
 
-        string jsonString = JsonSerializer.Serialize(allcards);
-        File.WriteAllText(filePath, jsonString);
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
     }
+
+    //Set the card to a score
+    // public void CardScoreSet(Card set)
+    // {
+    //     List<Card> allcards = GetAllCards();
+    //     for(int i = allcards.Count-1; i > -1; i--)
+    //     {
+    //         if(allcards[i].TopicName == set.TopicName)
+    //         {
+    //             allcards[i].Success = set.Success;
+    //             allcards[i].AvgScore = set.AvgScore;
+    //         }
+    //     }
+
+    //     string jsonString = JsonSerializer.Serialize(allcards);
+    //     File.WriteAllText(filePath, jsonString);
+    // }
 
     
 }

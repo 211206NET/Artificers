@@ -252,11 +252,18 @@ void AddMoreCards(string topNameVar)
             TopicName = topNameVar,
             Question = q,
             Answer = a,
-            Used = false,
+            Used = false
+        };
+        _bl.AddCard(cardAdd);
+
+        Score scoreAdd = new Score{
+            CardId = deckCount,
+            ParentId = topNameVar,
+            CardScore = true,
             Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
             AvgScore = 0
         };
-        _bl.AddCard(cardAdd);
+        _bl.AddCard(scoreAdd);
 
         Console.WriteLine($"[y/n] Make another card for this topic {topNameVar}?");
         choose = Console.ReadLine();
@@ -269,24 +276,16 @@ void SetTopicScore(string topNameVar, int score)
 {
     List<Topic> allTopic = _bl.GetAllTopics();
     List<Card> allCards = _bl.GetAllCards();
+    List<Score> allScores = _bl.GetAllScores();
     
-    Topic tp = new Topic
+    Score tp = new Score
     {
-        Name = topNameVar,
-        OverallScore = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
+        ParentId = topNameVar,
+        Success = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
         AvgScore = score
     };
     
     _bl.TopicScoreSet(tp);
-
-    Card cd = new Card
-    {
-        TopicName = topNameVar,
-        Success = new Queue<decimal>(new decimal[] { score, score, score, score, score }),
-        AvgScore = score
-    };
-
-    _bl.CardScoreSet(cd);
 
     Console.WriteLine($"Score for {topNameVar} set to {score}");
 }

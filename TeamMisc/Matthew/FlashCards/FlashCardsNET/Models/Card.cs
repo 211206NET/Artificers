@@ -3,14 +3,10 @@ public class Card
 {
 
     //Empty constructor
-    public Card ()
-    {
-        this.Success = new Queue<decimal>();
-    }
+    public Card (){}
 
     public Card (int cardId, string topicName, string question, string answer, bool used)
     {
-        this.Success = new Queue<decimal>(); 
         this.CardId = cardId;
         this.TopicName = topicName;
         this.Question = question;
@@ -37,10 +33,6 @@ public class Card
     //If this card has been used during the current practice session yet (used to order cards avoiding dupes)
     public bool Used { get; set; } //Set back to false for all cards after practice session order is established
 
-    //Average rate of success over last five sessions. After flipping the card the user chooses I was right, close, or I was wrong
-    public Queue<decimal> Success { get; set; } //1 = pass question, 0.5 = partial credit, 0 = fail question, average shown above question
-
-    public decimal AvgScore { get; set; }
 
 
 

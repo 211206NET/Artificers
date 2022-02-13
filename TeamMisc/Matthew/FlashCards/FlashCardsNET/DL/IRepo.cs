@@ -18,7 +18,6 @@ public interface IRepo
     void AddTopic(Topic topicToAdd);
     void TallyTopic(int topicId, decimal curAvg, decimal avg);
     void DestroyTopic(string topicName);
-    void TopicScoreSet(Topic set);
 
 
     List<Card> GetAllCards();
@@ -29,5 +28,8 @@ public interface IRepo
     void DestroyCard(string topicName);
     void EditCard(Card cardInfo); 
     void CardScoreSet(Card set);
+
+    List<Score> GetAllScores();
+    void TopicScoreSet(Score set);
 
 }
