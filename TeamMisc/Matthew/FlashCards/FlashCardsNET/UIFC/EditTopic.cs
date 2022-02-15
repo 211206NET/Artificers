@@ -263,7 +263,7 @@ void AddMoreCards(string topNameVar)
             Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
             AvgScore = 0
         };
-        _bl.AddCard(scoreAdd);
+        _bl.AddScore(scoreAdd);
 
         Console.WriteLine($"[y/n] Make another card for this topic {topNameVar}?");
         choose = Console.ReadLine();
@@ -274,8 +274,8 @@ void AddMoreCards(string topNameVar)
 
 void SetTopicScore(string topNameVar, int score)
 {
-    List<Topic> allTopic = _bl.GetAllTopics();
-    List<Card> allCards = _bl.GetAllCards();
+    // List<Topic> allTopic = _bl.GetAllTopics();
+    // List<Card> allCards = _bl.GetAllCards();
     List<Score> allScores = _bl.GetAllScores();
     
     Score tp = new Score
@@ -286,7 +286,6 @@ void SetTopicScore(string topNameVar, int score)
     };
     
     _bl.TopicScoreSet(tp);
-
     Console.WriteLine($"Score for {topNameVar} set to {score}");
 }
 
@@ -302,6 +301,7 @@ void DeleteTopic(int topIndex)
             Console.WriteLine($"{nameTarget} has been removed.");
             _bl.DestroyTopic(nameTarget);
             _bl.DestroyCard(nameTarget);
+            _bl.DestroyScore(nameTarget);
         break;
 
         case "n":

@@ -71,18 +71,25 @@ void BuildTopic()
             Console.WriteLine("A topic with this name already exists, enter a new name:");
             choose = Console.ReadLine();
         }
-        
     }
 
     //Add the new topic
     Topic makeTopic = new Topic{
         TopicId = makeTopicId,
         Name = choose,
-        OverallScore = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),
-        AvgScore = 0
+        // OverallScore = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),
+        // AvgScore = 0
     };
     _bl.AddTopic(makeTopic);
 
+    Score scoreAdd = new Score{
+        CardId = makeTopicId,
+        ParentId = choose,
+        CardScore = false,
+        Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
+        AvgScore = 0
+    };
+    _bl.AddScore(scoreAdd);
 
     while(!exit){
         //Ask for input for card
@@ -117,13 +124,22 @@ void BuildTopic()
             Question = q,
             Answer = a,
             Used = false,
+            // Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
+            // AvgScore = 0
+        };
+        _bl.AddCard(makeCard);
+
+        Score scoreAdd2 = new Score{
+            CardId = makeCardId,
+            ParentId = choose,
+            CardScore = true,
             Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
             AvgScore = 0
         };
+        _bl.AddScore(scoreAdd2);  
         
         q = "";
         a = "";
-        _bl.AddCard(makeCard);
         allCards = _bl.GetAllCards();
     }
 

@@ -5,10 +5,11 @@ namespace DL;
 //This class reads and writes to the file
 public class FileRepo : IRepo
 {
-    public FileRepo()
-    { }
+    public FileRepo(){} 
 
-    //=================== TOPICS
+    //------------------------------------------------------------------------------------------------------------\\
+    //                                                    Topics                                                  \\
+    //------------------------------------------------------------------------------------------------------------\\
     private string filePathT = "../DL/Topics.json";
     
     /// <summary>
@@ -63,25 +64,6 @@ public class FileRepo : IRepo
         File.WriteAllText(filePathT, jsonString);
     }
 
-    //For changes done at end of study session
-    public void TallyTopic(int topicId, decimal curAvg, decimal avg)
-    {
-        List<Topic> allTopics = GetAllTopics();
-        foreach(Topic topico in allTopics)
-        {
-            if(topico.TopicId == topicId)
-            {
-                topico.OverallScore.Dequeue(); //Remove an old result
-                topico.OverallScore.Enqueue(curAvg);
-                topico.AvgScore = avg;
-                break;
-            }
-        }
-
-        string jsonString = JsonSerializer.Serialize(allTopics);
-        File.WriteAllText(filePathT, jsonString);
-    }
-
     //Removes topic
     public void DestroyTopic(string topicName)
     {
@@ -101,7 +83,9 @@ public class FileRepo : IRepo
 
 
 
-    //===================  CARDS
+    //------------------------------------------------------------------------------------------------------------\\
+    //                                                    Cards                                                   \\
+    //------------------------------------------------------------------------------------------------------------\\
     private string filePath = "../DL/Cards.json";
 
     /// <summary>
@@ -156,55 +140,6 @@ public class FileRepo : IRepo
         File.WriteAllText(filePath, jsonString);
     }
 
-    //For changes done during study session
-    public void ChangeCard(int cardId, decimal success)
-    {
-        List<Card> allCards = GetAllCards();
-        foreach(Card cardo in allCards)
-        {
-            if(cardo.CardId == cardId)
-            {
-                //Shift old scores
-                //crd.Success.Peek();
-                cardo.Success.Dequeue();//Remove oldest element from Queue
-                //Console.WriteLine($"cardo.Success.Count: {cardo.Success.Count}, cardo.CardId: {cardo.CardId}, cardId: {cardId}"); //DEBUG
-                cardo.Used = true; 
-                cardo.Success.Enqueue(success);
-                //cardo.Success = success;
-                // for(int i = 0; i < 6; i++)
-                // {
-                //     cardo.Success[i] = success[i];
-                // }
-                // cardo.Success[0] = success[0];
-                // cardo.Success[1] = success[1];
-                // cardo.Success[2] = success[2];
-                // cardo.Success[3] = success[3];
-                // cardo.Success[4] = success[4];
-                break;
-            }
-        }
-
-        string jsonString = JsonSerializer.Serialize(allCards);
-        File.WriteAllText(filePath, jsonString);
-    }
-
-    //For changes done at end of study session
-    // public void TallyCard(int cardId, decimal avg)
-    // {
-    //     List<Card> allCards = GetAllCards();
-    //     foreach(Card cardo in allCards)
-    //     {
-    //         if(cardo.CardId == cardId)
-    //         {
-    //             cardo.AvgScore = avg;
-    //             break;
-    //         }
-    //     }
-
-    //     string jsonString = JsonSerializer.Serialize(allCards);
-    //     File.WriteAllText(filePath, jsonString);
-    // }
-
     //Removes card from deck one by one when deleteing a topic
     public void DestroyCard(string topicName)
     {
@@ -239,8 +174,9 @@ public class FileRepo : IRepo
         File.WriteAllText(filePath, jsonString);
     }
 
-
-    //Scores
+    //------------------------------------------------------------------------------------------------------------\\
+    //                                                    Scores                                                  \\
+    //------------------------------------------------------------------------------------------------------------\\
     private string filePathS = "../DL/Score.json";
     
     public List<Score> GetAllScores()
@@ -279,6 +215,87 @@ public class FileRepo : IRepo
         File.WriteAllText(filePathS, jsonString);
     }
 
+    //Add a new score for each card
+    public void AddScore(Score scoreToAdd)
+    {
+        List<Score> allScores = GetAllScores();
+        allScores.Add(scoreToAdd);
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
+    //For changes done during study session
+    public void ChangeScore(int scoreId, decimal success)
+    {
+        List<Score> allScores = GetAllScores();
+        foreach(Score scoro in allScores)
+        {
+            if(scoro.CardId == scoreId)
+            {
+                //Shift old scores
+                //crd.Success.Peek();
+                scoro.Success.Dequeue();//Remove oldest element from Queue
+                //Console.WriteLine($"cardo.Success.Count: {cardo.Success.Count}, cardo.CardId: {cardo.CardId}, cardId: {cardId}"); //DEBUG
+                //scoro.Used = true; 
+                scoro.Success.Enqueue(success);
+                break;
+            }
+        }
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
+
+    //For changes done at end of study session
+    public void TallyCardScore(int cardId, decimal avg)
+    {
+        List<Score> allScores = GetAllScores();
+        foreach(Score scoro in allScores)
+        {
+            if(scoro.CardId == cardId)
+            {
+                scoro.AvgScore = avg;
+                break;
+            }
+        }
+
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
+    //For changes done at end of study session
+    public void TallyTopic(string topicName, decimal curAvg, decimal avg)
+    {
+        List<Score> allScores = GetAllScores();
+        foreach(Score scoro in allScores)
+        {
+            if(scoro.ParentId == topicName)
+            {
+                scoro.Success.Dequeue(); //Remove an old result
+                scoro.Success.Enqueue(curAvg);
+                scoro.AvgScore = avg;
+                break;
+            }
+        }
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
+    //Removes card from deck one by one when deleteing a topic
+    public void DestroyScore(string topicName)
+    {
+        List<Score> allScores = GetAllScores();
+        for(int i = allScores.Count-1; i > -1; i--)
+        {
+            if(allScores[i].ParentId == topicName)
+            {
+                allScores.Remove(allScores[i]);
+            }
+        }
+        string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
     //Set the card to a score
     // public void CardScoreSet(Card set)
     // {
@@ -291,10 +308,8 @@ public class FileRepo : IRepo
     //             allcards[i].AvgScore = set.AvgScore;
     //         }
     //     }
-
     //     string jsonString = JsonSerializer.Serialize(allcards);
     //     File.WriteAllText(filePath, jsonString);
     // }
 
-    
 }

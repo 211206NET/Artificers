@@ -16,9 +16,9 @@ public StudyRoom(IBL bl)
 
 public void Start()
 {
-
 List<Topic> allTopic = _bl.GetAllTopics();
 List<Card> allCards = _bl.GetAllCards();
+List<Score> allScores = _bl.GetAllScores();
 bool exit = false; //To terminate main loop
 int topicIndex = -1;
 bool siegeMode = false; //Only show questions that have a score below 80
@@ -26,11 +26,48 @@ while(!exit) //Main Loop
 {
     allTopic = _bl.GetAllTopics();
     allCards = _bl.GetAllCards();
+    allScores = _bl.GetAllScores();
     //Study menu
     Console.WriteLine("Choose a topic from the list, to 'b' to exit");
+    decimal getScore = 0.0m;
+    decimal getCardScore = 0.0m;
+    bool makeIt = false;
     for(int i = 0; i < allTopic.Count; i++){
+        //Get score
+        for(int j = 0; j < allScores.Count; j++){
+            if(allScores[j].ParentId == allTopic[i].Name)
+            {getScore = Math.Round(allScores[j].AvgScore*100,0);}
+        }
         //Show Topic Choice
-        Console.WriteLine($"[{i}] {allTopic[i].Name}, Score: {Math.Round(allTopic[i].AvgScore*100,0)}/100");
+        Console.WriteLine($"[{i}] {allTopic[i].Name}, Score: {getScore}/100");
+        //Check Topic has score
+        if(allScores.Count > 0)
+        {
+            //Check all scores
+            if(allScores[allTopic[i].TopicId] != null)
+            {
+                Console.WriteLine("Found score");
+            }
+            else
+            {makeIt = true; Console.WriteLine("Didn't find score");}
+        }
+        else
+        {
+            //If not found make
+            makeIt = true;
+        }
+
+        if(makeIt){
+            Score scoreAdd = new Score{
+                CardId = allTopic[i].TopicId,
+                ParentId = allTopic[i].Name,
+                CardScore = false,
+                Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),
+                AvgScore = 0
+            };
+            _bl.AddScore(scoreAdd);
+            makeIt = false;
+        }
     }
 
     string choose = Console.ReadLine() ?? "";//User input choice
@@ -87,11 +124,34 @@ while(!exit) //Main Loop
     //foreach(Card crd in allCards)
     for(int i = 0; i < testOrder.Length; i++)
     {
+        
         sI = testOrder[i]; //First random number in random array
-        if(allCards[sI].TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && allCards[sI].AvgScore < 0.8m))){
+
+        //Get score for card
+        // for(int j = 0; j < allScores.Count; j++){
+        //     if(allScores[j].ParentId == allCards[sI].TopicName)
+        //     {}
+        // }
+        if(allScores.Count > 0 && allScores[sI] != null){getCardScore = Math.Round(allScores[sI].AvgScore*100,0);}
+        else
+        {
+            //Add new Score entry
+            Score scoreAdd = new Score{
+                CardId = allCards[sI].CardId,
+                ParentId = allCards[sI].TopicName,
+                CardScore = true,
+                Success = new Queue<decimal>(new decimal[] { 0, 0, 0, 0, 0 }),//{}//(new int[] {0,0,0,0,0}) //(0,0,0,0,0)//{0,0,0,0,0}
+                AvgScore = 0
+            };
+            _bl.AddScore(scoreAdd);
+            getCardScore = 0;
+        }
+
+        if(allCards[sI].TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && getCardScore < 0.8m))){
+        
         Console.WriteLine("-------------------------------------------------------------------------------------");
         Console.WriteLine($"Question: {allCards[sI].Question}\n");
-        Console.WriteLine($"\tTake time to answer the question from memory, press anything to flip the card. Current score: {allCards[sI].AvgScore}\n");
+        Console.WriteLine($"\tTake time to answer the question from memory, press anything to flip the card. Current score: {getCardScore}\n");
         Console.ReadLine();
         Console.WriteLine($"Answer: {allCards[sI].Answer}\n");
         
@@ -138,7 +198,7 @@ while(!exit) //Main Loop
         //crd.Success.Dequeue(); //DEBUG
         //Console.WriteLine($"crd.Success.Count: {crd.Success.Count}, crd.CardId: {crd.CardId}"); //DEBUG
         //Console.ReadLine(); //DEBUG
-        _bl.ChangeCard(allCards[sI].CardId, studySuccess);
+        _bl.ChangeScore(allCards[sI].CardId, studySuccess);
         //allCards = _bl.GetAllCards(); //DEBUG
         }
 
@@ -147,10 +207,10 @@ while(!exit) //Main Loop
     //Tally score
     decimal runningAvg = 0; decimal whatPeek = 0; decimal totalRunning = 0; int cardsInDeck = 0;
     Queue<decimal> dumpQueue;
-    foreach(Card cardScore in allCards)
+    foreach(Score cardScore in allScores)
     {
         //Each card
-        if(cardScore.TopicName == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && cardScore.AvgScore < 0.8m))){
+        if(cardScore.ParentId == allTopic[topicIndex].Name && (siegeMode == false || (siegeMode == true && cardScore.AvgScore < 0.8m))){
             cardsInDeck += 1;
             dumpQueue = cardScore.Success;
             //Console.WriteLine($"dumpQueue.Count: {dumpQueue.Count}, cardScore.CardId: {cardScore.CardId}, cardScore.Success.Count: {cardScore.Success.Count}"); //DEBUG
@@ -164,7 +224,7 @@ while(!exit) //Main Loop
             runningAvg = (runningAvg/5); //Set the average score for the card
 
         //Add card to deck stats
-        _bl.TallyCard(cardScore.CardId, runningAvg);
+        _bl.TallyCardScore(cardScore.CardId, runningAvg);
         //Console.WriteLine($"totalRunning: {runningAvg}"); //DEBUG
         totalRunning += runningAvg;
         runningAvg = 0;
@@ -172,9 +232,7 @@ while(!exit) //Main Loop
     }
 
     //Console.WriteLine($"cardsInDeck: {cardsInDeck}, allTopic[topicIndex].TopicId: {allTopic[topicIndex].TopicId}"); //DEBUG
-
     //Finalize average for deck this session
-    
     //Console.WriteLine($"totalRunning: {totalRunning}, cardsInDeck: {cardsInDeck}"); //DEBUG
     if(cardsInDeck>0){totalRunning = Math.Round(totalRunning/cardsInDeck, 2);}else{totalRunning = 1;}
     //Console.WriteLine($"totalRunning: {totalRunning}"); //DEBUG
@@ -182,9 +240,13 @@ while(!exit) //Main Loop
     //Return average overall score for this deck
     //Tally score
 
-    dumpQueue = allTopic[topicIndex].OverallScore; //Setting Queue to queue
-
-
+    //pass pk/fk to score
+    int passInt = allTopic[topicIndex].TopicId;
+    //Console.WriteLine($"passInt: {passInt}");
+    //Console.ReadLine();
+    if(allScores.Count > 0){
+    dumpQueue = allScores[passInt].Success; //Setting Queue to queue
+    
     //Console.WriteLine($"allTopic[topicIndex].OverallScore.Count: {allTopic[topicIndex].OverallScore.Count}"); //DEBUG
     //Console.ReadLine(); //DEBUG
 
@@ -198,17 +260,16 @@ while(!exit) //Main Loop
     
     //Console.WriteLine($"runningAvg: {runningAvg}"); //DEBUG
     runningAvg = ((totalRunning+runningAvg)/6); //Set the average score for the card
-        
 
     //Add card to deck stats
-    _bl.TallyTopic(allTopic[topicIndex].TopicId, Math.Round(totalRunning,2), Math.Round(runningAvg,2));
-   
+    _bl.TallyTopic(allTopic[topicIndex].Name, Math.Round(totalRunning,2), Math.Round(runningAvg,2));
+
+    }//End check scores exist
+
     //Reset
     cardsInDeck = 0;
 
     Console.WriteLine("Finished!\n");
-
-
 
 
 

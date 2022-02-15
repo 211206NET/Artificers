@@ -10,6 +10,13 @@ public MainMenu(IBL bl)
 public void Start() {
 
 bool exit = false; //Exit main loop
+
+
+//First ensure each topic has a score json
+// List<Score> allScores = _bl.GetAllScores();
+// List<Topic> allTopic = _bl.GetAllTopics();
+
+
 Console.WriteLine("Welcome to Flip Cards NET!\nTest your memory and study here.");
 
 while(!exit)//Main Loop

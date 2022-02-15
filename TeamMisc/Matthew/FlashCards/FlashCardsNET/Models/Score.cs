@@ -10,8 +10,8 @@ public class Score
 
     public Score (int cardId, string parentId, bool cardScore, decimal avg)
     {
-        this.CardId = cardId;
-        this.ParentId = parentId;
+        this.CardId = cardId;//For card
+        this.ParentId = parentId;//For topic
         this.CardScore = cardScore;
         this.Success = new Queue<decimal>(); 
         this.AvgScore = avg;

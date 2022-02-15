@@ -38,10 +38,10 @@ public class FCBL : IBL
         _dl.AddTopic(topicToAdd);
     }
 
-    public void TallyTopic(int topicId, decimal curAvg, decimal avg)
-    {
-        _dl.TallyTopic(topicId, curAvg, avg);
-    }
+    // public void TallyTopic(int topicId, decimal curAvg, decimal avg)
+    // {
+    //     _dl.TallyTopic(topicId, curAvg, avg);
+    // }
     public void DestroyTopic(string topicName)
     {
         _dl.DestroyTopic(topicName);
@@ -84,15 +84,15 @@ public class FCBL : IBL
     /// </summary>
     /// <param name="cardId"></param>
     /// <param name="success"></param>
-    public void ChangeCard(int cardId, decimal success)
-    {
-        _dl.ChangeCard(cardId, success);
-    }
+    // public void ChangeCard(int cardId, decimal success)
+    // {
+    //     _dl.ChangeCard(cardId, success);
+    // }
 
-    public void TallyCard(int cardId, decimal avg)
-    {
-        _dl.TallyCard(cardId,avg);
-    }
+    // public void TallyCard(int cardId, decimal avg)
+    // {
+    //     _dl.TallyCard(cardId,avg);
+    // }
 
     public void DestroyCard(string topicName)
     {
@@ -104,10 +104,10 @@ public class FCBL : IBL
         _dl.EditCard(cardInfo);
     }
 
-    public void CardScoreSet(Card set)
-    {
-        _dl.CardScoreSet(set);
-    }
+    // public void CardScoreSet(Card set)
+    // {
+    //     _dl.CardScoreSet(set);
+    // }
 
 
     //SCORES
@@ -119,5 +119,30 @@ public class FCBL : IBL
     public void TopicScoreSet(Score set)
     {
         _dl.TopicScoreSet(set);
+    }
+
+    public void AddScore(Score scoreToAdd)
+    {
+        _dl.AddScore(scoreToAdd);
+    }
+
+    public void ChangeScore(int scoreId, decimal success)
+    {
+        _dl.ChangeScore(scoreId, success);
+    }
+
+    public void TallyCardScore(int cardId, decimal avg)
+    {
+        _dl.TallyCardScore(cardId,avg);
+    }
+
+    public void TallyTopic(string topicName, decimal curAvg, decimal avg)
+    {
+        _dl.TallyTopic(topicName,curAvg,avg);
+    }
+
+    public void DestroyScore(string topicName)
+    {
+        _dl.DestroyScore(topicName);
     }
 }
