@@ -9,6 +9,7 @@ public interface IBL
     void AddTopic(Topic topicToAdd);
     //void TallyTopic(int topicId, decimal curAvg, decimal avg);
     void DestroyTopic(string topicName);
+    void OrderTopics();
 
 
     //Cards
@@ -29,5 +30,8 @@ public interface IBL
     void TallyCardScore(int cardId, decimal avg);
     void TallyTopic(string topicName, decimal curAvg, decimal avg);
     void DestroyScore(string topicName);
+
+    //Omni
+    void ChangeTopicName(string topName, string newName);
 
 }

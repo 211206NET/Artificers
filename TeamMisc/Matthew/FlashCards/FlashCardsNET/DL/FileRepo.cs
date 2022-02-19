@@ -80,7 +80,16 @@ public class FileRepo : IRepo
         File.WriteAllText(filePathT, jsonString);
     }
 
+    public void OrderTopics()
+    {
+        List<Topic> allTopics = GetAllTopics();
+        
+        //Sort list by name
+        List<Topic> sortedList = allTopics.OrderBy(o=>o.Name).ToList();
 
+        string jsonString = JsonSerializer.Serialize(sortedList);
+        File.WriteAllText(filePathT, jsonString);
+    }
 
 
     //------------------------------------------------------------------------------------------------------------\\
@@ -293,6 +302,43 @@ public class FileRepo : IRepo
             }
         }
         string jsonString = JsonSerializer.Serialize(allScores);
+        File.WriteAllText(filePathS, jsonString);
+    }
+
+    
+    //------------------------------------------------------------------------------------------------------------\\
+    //                                                     Omni                                                   \\
+    //------------------------------------------------------------------------------------------------------------\\
+
+    //Omni Method: Change name of topic in all lists
+    public void ChangeTopicName(string topName, string newName)
+    {
+        List<Score> allScores = GetAllScores();
+        List<Topic> allTopics = GetAllTopics();
+        List<Card> allCards = GetAllCards();
+        for(int i = allScores.Count-1; i > -1; i--)
+        {
+            //Update name of topics
+            foreach(Topic tp in allTopics)
+            {
+                if(tp.Name == topName){tp.Name = newName;}
+            }
+            //Update name of Cards
+            foreach(Card cr in allCards)
+            {
+                if(cr.TopicName == topName){cr.TopicName = newName;}
+            }
+            //Update name of Score
+            foreach(Score sc in allScores)
+            {
+                if(sc.ParentId == topName){sc.ParentId = newName;}
+            }
+        }
+        string jsonString = JsonSerializer.Serialize(allTopics);
+        File.WriteAllText(filePathT, jsonString);
+        jsonString = JsonSerializer.Serialize(allCards);
+        File.WriteAllText(filePath, jsonString);
+        jsonString = JsonSerializer.Serialize(allScores);
         File.WriteAllText(filePathS, jsonString);
     }
 

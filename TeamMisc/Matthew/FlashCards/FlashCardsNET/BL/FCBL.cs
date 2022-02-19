@@ -47,7 +47,10 @@ public class FCBL : IBL
         _dl.DestroyTopic(topicName);
     }
 
-
+    public void OrderTopics()
+    {
+        _dl.OrderTopics();
+    }
 
     //CARDS
 
@@ -144,5 +147,11 @@ public class FCBL : IBL
     public void DestroyScore(string topicName)
     {
         _dl.DestroyScore(topicName);
+    }
+
+    //OMNI
+    public void ChangeTopicName(string topName, string newName)
+    {
+        _dl.ChangeTopicName(topName,newName);
     }
 }

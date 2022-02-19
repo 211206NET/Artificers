@@ -10,16 +10,15 @@ namespace DL;
 //Interface only has methods
 public interface IRepo
 {
-    //Notice, how we're lacking access modifiers
-    //interface members are implicitely public
-    //they also lack method body
+    //Topics
     List<Topic> GetAllTopics();
     Topic GetTopicByIndex(int index);
     void AddTopic(Topic topicToAdd);
     //void TallyTopic(int topicId, decimal curAvg, decimal avg);
     void DestroyTopic(string topicName);
+    void OrderTopics();
 
-
+    //Cards
     List<Card> GetAllCards();
     Card GetCardByIndex(int index);
     void AddCard(Card restaurantToAdd);
@@ -37,5 +36,8 @@ public interface IRepo
     void TallyCardScore(int cardId, decimal avg);
     void TallyTopic(string topicName, decimal curAvg, decimal avg);
     void DestroyScore(string topicName);
+
+    //Omni
+    void ChangeTopicName(string topName, string newName);
 
 }
