@@ -70,6 +70,7 @@ while(!exit) //Main Loop
     Console.WriteLine($"[3] Add cards to topic");// 
     Console.WriteLine($"[4] Reset score of topic and all cards to 0");// 
     Console.WriteLine($"[5] Set score of topic and all cards to 1 (mark as finished)");// 
+    Console.WriteLine($"[6] Edit the name of a topic");//
     Console.WriteLine($"[delete] Type delete to permanently remove entire topic and all cards within it");// 
     Console.WriteLine($"[b] Return to main menu\n");// 
 
@@ -95,6 +96,10 @@ while(!exit) //Main Loop
 
         case "5":
             SetTopicScore(topName, 1);
+        break;
+
+        case "6":
+            SetTopicName(topName);
         break;
 
         case "delete":
@@ -288,6 +293,26 @@ void SetTopicScore(string topNameVar, int score)
     _bl.TopicScoreSet(tp);
     Console.WriteLine($"Score for {topNameVar} set to {score}");
 }
+
+
+void SetTopicName(string topName)
+{
+    List<Topic> allTopic = _bl.GetAllTopics();
+    List<Card> allCards = _bl.GetAllCards();
+    List<Score> allScores = _bl.GetAllScores();
+    string? newName = "";
+
+    Console.WriteLine($"The selected topic name is: \"{topName}\". \n"+
+    "Type what you want to change it to or enter nothing to abort.\n");
+    newName = Console.ReadLine() ?? "";
+
+    if(newName != "")
+    {
+        //User chose a new name, go through each list and update name
+        _bl.ChangeTopicName(topName,newName);
+    }
+
+}//End SetTopicName
 
 void DeleteTopic(int topIndex)
 {

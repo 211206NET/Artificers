@@ -1,5 +1,7 @@
+
 namespace UI;
-public class MainMenu : IMenu {
+
+public class MainMenu : IMenu { //}: IComparablee : IComparable<MainMenu> {
 private IBL _bl;
 
 public MainMenu(IBL bl)
@@ -14,8 +16,10 @@ bool exit = false; //Exit main loop
 
 //First ensure each topic has a score json
 // List<Score> allScores = _bl.GetAllScores();
-// List<Topic> allTopic = _bl.GetAllTopics();
-
+List<Topic> allTopic = _bl.GetAllTopics();
+_bl.OrderTopics();
+//var ordered = allTopic.OrderByDescending(x=>x.Name);
+//allTopic.Sort();
 
 Console.WriteLine("Welcome to Flip Cards NET!\nTest your memory and study here.");
 

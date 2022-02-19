@@ -46,7 +46,7 @@ while(!exit) //Main Loop
             //Check all scores
             if(allScores[allTopic[i].TopicId] != null)
             {
-                Console.WriteLine("Found score");
+                //Console.WriteLine("Found score");
             }
             else
             {makeIt = true; Console.WriteLine("Didn't find score");}
@@ -235,7 +235,7 @@ while(!exit) //Main Loop
     //Finalize average for deck this session
     //Console.WriteLine($"totalRunning: {totalRunning}, cardsInDeck: {cardsInDeck}"); //DEBUG
     if(cardsInDeck>0){totalRunning = Math.Round(totalRunning/cardsInDeck, 2);}else{totalRunning = 1;}
-    //Console.WriteLine($"totalRunning: {totalRunning}"); //DEBUG
+    //Console.WriteLine($"totalRunning after calc: {totalRunning}"); //DEBUG
 
     //Return average overall score for this deck
     //Tally score
